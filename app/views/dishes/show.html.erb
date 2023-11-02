@@ -8,3 +8,10 @@
  <h2>Total Calories: <%= @dish.total_calories%></h2>
 
  <h2>Chef for this Dish: <%= @dish.chef_name %></h2>
+
+ <h2>Add an Ingredient</h2>
+ <%= form_with url:"/dishes/#{@dish.id}", method: :patch, local: :true do |f| %>
+  <%= f.label "Search for an ingredient by ID:" %>
+    <%= f.text_field :ingredient_id %>
+    <%= f.submit "Add Ingredient" %>
+  <% end %>

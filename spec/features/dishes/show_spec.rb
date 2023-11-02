@@ -10,6 +10,7 @@ RSpec.describe 'the dish show page' do
     @ingredient4 = @chili.ingredients.create!(name: "Hatch Green Chiles", calories: 10)
     @ingredient5 = @chili.ingredients.create!(name: "Dried Pequin", calories: 5)
     @ingredient6 = @chili.ingredients.create!(name: "Canned Hominey", calories: 15)
+    @tomato = Ingredient.create!(name: "Tomato Sauce", calories: 10)
   end
 
   it 'gives dish name and description' do
@@ -40,5 +41,18 @@ RSpec.describe 'the dish show page' do
     visit "/dishes/#{@chili.id}"
 
     expect(page).to have_content("Chef for this Dish: Shawn")
+  end
+
+  it 'allows ingredient addition' do
+    visit "/dishes/#{@chili.id}"
+
+    expect(page).to have_content("Add an Ingredient")
+
+    fill_in(:ingredient_id, with: "#{@tomato.id}")
+    click_button("Add Ingredient")
+
+    expect(current_path).to eq("/dishes/#{@chili.id}")
+    expect(page).to have_content(@tomato.name)
+    expect(page).to have_content("Total Calories: 110")
   end
 end
