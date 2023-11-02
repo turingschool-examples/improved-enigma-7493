@@ -1,0 +1,4 @@
+<h1>Chef <%= @chef.name %>'s Ingredients of Choice</h1>
+ <% @ingredients.each do |i| %>
+  <li><%= i.name %></li>
+ <% end %>
