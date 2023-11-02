@@ -24,7 +24,6 @@ RSpec.describe 'the dish show page' do
     click_link("Shawn's Ingredients")
 
     expect(current_path).to eq("/chefs/#{@shawn.id}/ingredients")
-    save_and_open_page
     expect(page).to have_content(@ingredient1.name)
     expect(page).to have_content(@ingredient2.name)
     expect(page).to have_content(@ingredient3.name)
