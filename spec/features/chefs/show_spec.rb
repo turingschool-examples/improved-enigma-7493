@@ -16,6 +16,7 @@ RSpec.describe 'the dish show page' do
     @pasta.add_ingredient(@tomato)
   end
 
+  # User Story 3
   it "has a link to a list of ingredients the chef uses" do
     visit "/chefs/#{@shawn.id}"
 

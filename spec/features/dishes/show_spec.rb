@@ -13,6 +13,7 @@ RSpec.describe 'the dish show page' do
     @tomato = Ingredient.create!(name: "Tomato Sauce", calories: 10)
   end
 
+  # User Story 1
   it 'gives dish name and description' do
     visit "/dishes/#{@chili.id}"
 
@@ -43,6 +44,7 @@ RSpec.describe 'the dish show page' do
     expect(page).to have_content("Chef for this Dish: Shawn")
   end
 
+  # User Story 2
   it 'allows ingredient addition' do
     visit "/dishes/#{@chili.id}"
 
@@ -54,5 +56,24 @@ RSpec.describe 'the dish show page' do
     expect(current_path).to eq("/dishes/#{@chili.id}")
     expect(page).to have_content(@tomato.name)
     expect(page).to have_content("Total Calories: 110")
+  end
+
+  # Extension 1
+  it "allows for ingredient deletion from show page" do
+    visit "/dishes/#{@chili.id}"
+
+    within "#ingredient-#{@ingredient1.id}" do
+      expect(page).to have_button("Delete Black Beans")
+
+      click_button("Delete Black Beans")
+    end
+
+    expect(current_path).to eq("/dishes/#{@chili.id}")
+    expect(page).to_not have_content(@ingredient1.name)
+    expect(page).to have_content(@ingredient2.name)
+    expect(page).to have_content(@ingredient3.name)
+    expect(page).to have_content(@ingredient4.name)
+    expect(page).to have_content(@ingredient5.name)
+    expect(page).to have_content(@ingredient6.name)
   end
 end

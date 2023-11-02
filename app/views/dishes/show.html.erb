@@ -2,7 +2,10 @@
   <p><%= @dish.description %></p>
   <h2>Ingredients</h2>
  <% @ingredients.each do |i| %>
-  <li><%= i.name %></li>
+  <div id="ingredient-<%= i.id %>">
+    <li><%= i.name %></li>
+    <%= button_to "Delete #{i.name}", "/dishes/#{@dish.id}/ingredients/#{i.id}", method: :delete %>
+  </div>
  <% end %>
 
  <h2>Total Calories: <%= @dish.total_calories%></h2>

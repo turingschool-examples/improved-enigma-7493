@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get "/dishes/:id", to: "dishes#show"
 
   patch "/dishes/:id", to: "dishes#update"
+  delete "/dishes/:id/ingredients/:ingredient_id", to: "dishes#destroy"
 
   get "/chefs/:id", to: "chefs#show"
 
