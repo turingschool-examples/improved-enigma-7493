@@ -1,0 +1,19 @@
+<h1><%= @dish.name %></h1>
+<p><%= @dish.description %></p>
+
+<section class="ingredients">
+  <h3>Ingredients</h3>
+  <% @dish.ingredients.each do | ingredient | %>
+      <p><%= ingredient.name %></p>
+  <% end %>
+</section>
+
+<p>Calories: <%= @dish.calories %></p>
+<p>Chef: <%= @dish.chef.name %></p>
+
+<%= form_with url: dish_ingredients_path(@dish), method: :post, data: {turbo: false} do |f| %>
+  <%= f.label :ingredient_id, "Add Ingredient" %>
+  <%= f.text_field :ingredient_id %>
+
+  <%= f.submit "Add" %>
+<% end %>
