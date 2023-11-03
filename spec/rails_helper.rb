@@ -69,4 +69,10 @@ RSpec.configure do |config|
       with.library :rails
     end
   end
+
+  config.include Module.new {
+    def saop
+      save_and_open_page
+    end
+  }, type: :feature
 end
