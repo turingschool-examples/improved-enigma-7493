@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Dish, type: :model do
+RSpec.describe '/dishes/:chef_id' do
   before :each do
     @gordon = Chef.create!(name: "Gordon Ramsay")
 
@@ -24,26 +24,30 @@ RSpec.describe Dish, type: :model do
     DishIngredient.create!(dish: @dish3, ingredient: @tomato)
   end
 
-  describe "validations" do
-      it {should validate_presence_of :name}
-      it {should validate_presence_of :description}
-  end
+  describe 'as a visitor' do
+    describe 'when I visit /dishes/:dish_id' do
+      it 'shows dishes name and description' do
+        #US 1
+        visit "/dishes/#{@dish1.id}"
+        
+        expect(page).to have_content("Dish's name: Burger")
+        expect(page).to have_content("Dish's description: Wagyu burger")
+      end
 
-  describe "relationships" do
-      it {should belong_to :chef}
-      it {should have_many :dish_ingredients}
-      it {should have_many(:ingredients).through(:dish_ingredients)}
-  end
+      it 'shows list of ingredients for the dish and calories' do
+        #US 1
+        visit "/dishes/#{@dish1.id}"
 
-  describe 'list_ingredients' do
-    it 'lists ingredients for the dish' do
-      expect(@dish1.list_ingredients).to eq("Beef, Bread, Onion, and Tomato")
-    end
-  end
+        expect(page).to have_content("Ingredients: #{@beef.name}, #{@bread.name}, #{@onion.name}, and #{@tomato.name}")
+        expect(page).to have_content("Total calories: 385")
+      end
 
-  describe 'total_calories' do
-    it 'calculates total calories for a dish' do
-      expect(@dish1.total_calories).to eq(385)
+      it 'shows chef name' do
+        #US 1
+        visit "/dishes/#{@dish1.id}"
+
+        expect(page).to have_content("Chef's name: Gordon Ramsay")
+      end
     end
   end
 end
