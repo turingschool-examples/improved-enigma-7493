@@ -48,6 +48,21 @@ RSpec.describe '/dishes/:chef_id' do
 
         expect(page).to have_content("Chef's name: Gordon Ramsay")
       end
+
+      it 'adds existing ingredient to that dish' do
+        #US 2
+        visit "/dishes/#{@dish2.id}"
+        expect(page).to have_content("Ingredients: #{@lettuce.name} and #{@tomato.name}")
+        
+        fill_in("Ingredient", with: @onion.id)
+        
+        click_button("Submit")
+        
+        expect(current_path).to eq("/dishes/#{@dish2.id}")
+        expect(page).to have_content("Ingredients: #{@lettuce.name}, #{@onion.name}, and #{@tomato.name}")
+        
+        save_and_open_page
+      end
     end
   end
 end

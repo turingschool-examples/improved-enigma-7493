@@ -37,7 +37,7 @@ RSpec.describe Dish, type: :model do
 
   describe 'list_ingredients' do
     it 'lists ingredients for the dish' do
-      expect(@dish1.list_ingredients).to eq("Beef, Bread, Onion, and Tomato")
+      expect(@dish1.list_ingredients.to_sentence).to eq("Beef, Bread, Onion, and Tomato")
     end
   end
 

@@ -5,7 +5,7 @@ class Dish < ApplicationRecord
   has_many :ingredients, through: :dish_ingredients
 
   def list_ingredients
-    ingredients.order(:name).pluck(:name).to_sentence
+    ingredients.order(:name).pluck(:name)
   end
 
   def total_calories
