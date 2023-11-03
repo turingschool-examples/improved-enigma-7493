@@ -5,4 +5,10 @@ class DishIngredientsController < ApplicationController
     DishIngredient.create(dish: dish, ingredient: ingredient)
     redirect_to "/dishes/#{dish.id}"
   end
+
+  def destroy
+    dish = Dish.find(params[:dish_id])
+    ingredient = Ingredient.find(params[:ingredient_id]).destroy
+    redirect_to "/dishes/#{dish.id}"
+  end
 end

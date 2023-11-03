@@ -11,4 +11,6 @@ Rails.application.routes.draw do
   get "/chefs/:chef_id", to: "chefs#show"
 
   get "/chefs/:chef_id/ingredients", to: "chef_ingredients#index"
+  
+  delete "/dishes/:dish_id", to: "dish_ingredients#destroy"
 end

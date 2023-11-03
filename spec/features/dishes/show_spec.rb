@@ -61,6 +61,18 @@ RSpec.describe '/dishes/:chef_id' do
         expect(current_path).to eq("/dishes/#{@dish2.id}")
         expect(page).to have_content("Ingredients: #{@lettuce.name}, #{@onion.name}, and #{@tomato.name}")
       end
+
+      it 'has a button to delete ingredient, and deletes it' do
+        #US extension
+        visit "/dishes/#{@dish2.id}"
+        expect(page).to have_button("Delete Lettuce")
+        expect(page).to have_button("Delete Tomato")
+
+        click_button("Delete Lettuce")
+
+        expect(current_path).to eq("/dishes/#{@dish2.id}")
+        expect(page).to_not have_content("Lettuce")
+      end
     end
   end
 end

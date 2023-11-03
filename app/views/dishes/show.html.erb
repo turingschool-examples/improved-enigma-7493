@@ -5,6 +5,9 @@
 <p>Ingredients: <%= @dish.list_ingredients.to_sentence %></p>
 <p>Total calories: <%= @dish.total_calories %></p>
 <p>Chef's name: <%= @dish.chef.name %></p>
+<p>Delete Ingredient: <% @dish.ingredients.each do |ingredient| %></p>
+<%= ingredient.name %><%= button_to "Delete #{ingredient.name}", "/dishes/#{@dish.id}", method: :delete, params: { :ingredient_id => ingredient.id } %>
+<% end %>
 
 <%= form_with url: "/dishes/#{@dish.id}/ingredients", method: :post, data: {turbo:false}, local: true do |form| %>
   
