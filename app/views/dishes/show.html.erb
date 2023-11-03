@@ -7,3 +7,10 @@
     <li><%= ingredient.name %></li>
     <% end %>
   <p>Total calories: <%= @dish.total_calories %></p>
+
+
+  <p>Add ingredient: <%= form_with url: "/dishes/#{@dish.id}/ingredients", method: :post, data:{turbo: false} do |f| %></p>
+  <%= f.label "Ingredient ID" %>
+  <%= f.text_field :ingredient_id %>
+  <%= f.submit "Add Ingredient" %>
+  <% end %>

@@ -6,5 +6,6 @@ class Dish < ApplicationRecord
 
   def total_calories
     ingredients.pluck(:calories).sum
+    # wanted to try using an aggregate that didn't require plucking 
   end
 end

@@ -8,6 +8,7 @@ RSpec.describe "Show page" do
     @broth = Ingredient.create!(name: "Vegetable broth", calories: 15)
     @ginger = Ingredient.create!(name: "Ginger", calories: 3)
     @mushrom = Ingredient.create!(name: "Mushroom", calories: 8)
+    @potato = Ingredient.create!(name: "Potato", calories: 7)
 
     DishIngredient.create!(dish_id: @ramen.id, ingredient_id: @noodles.id)
     DishIngredient.create!(dish_id: @ramen.id, ingredient_id: @broth.id)
@@ -27,6 +28,26 @@ RSpec.describe "Show page" do
     expect(page).to have_content(@ginger.name)
     expect(page).to have_content(@mushrom.name)
     expect(page).to have_content("Total calories: 36")
-    # save_and_open_page
+
+    expect(page).to_not have_content(@potato.name)
+  end
+
+  it "has a form to add an existing ingredient to a dish through an ID" do 
+    visit "/dishes/#{@ramen.id}"
+
+    expect(page).to have_field(:ingredient_id)
+    expect(page).to have_button("Add Ingredient")
+  end
+
+  it "adds an ingredient to a dishes show page via an ingredient ID" do 
+    visit "/dishes/#{@ramen.id}"
+
+    expect(page).to_not have_content(@potato.name)
+
+    fill_in :ingredient_id, with: @potato.id 
+    click_button("Add Ingredient")
+
+    expect(current_path).to eq("/dishes/#{@ramen.id}")
+    expect(page).to have_content(@potato.name)
   end
 end
