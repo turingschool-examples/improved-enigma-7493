@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Chef, type: :model do
+RSpec.describe '/chefs/:chef_id' do
   before :each do
     @gordon = Chef.create!(name: "Gordon Ramsay")
 
@@ -24,18 +24,23 @@ RSpec.describe Chef, type: :model do
     DishIngredient.create!(dish: @dish3, ingredient: @tomato)
   end
 
-  describe "validations" do
-      it {should validate_presence_of :name}
-  end
+  describe 'as a visitor' do
+    describe 'when I visit /chefs/:chef_id' do
+      it 'has a link to view a list of all ingredients' do
+        #US 3
+        visit "/chefs/#{@gordon.id}"
 
-  describe "relationships" do
-      it {should have_many :dishes}
-      it {should have_many(:ingredients).through(:dishes)}
-  end
+        expect(page).to have_link("View All Ingredients")
+      end
 
-  describe 'distinct_ingredients' do
-    it 'shows distinct ingredients used by chef' do
-      expect(@gordon.distinct_ingredients).to eq([@beef.name, @bread.name, @lettuce.name, @onion.name, @tomato.name])
+      it 'lists distinct ingredients' do
+        #US 3
+        visit "/chefs/#{@gordon.id}"
+        click_link("View All Ingredients")
+      
+        expect(current_path).to eq("/chefs/#{@gordon.id}/ingredients")
+        expect(page).to have_content("All Ingredients: #{@beef.name}, #{@bread.name}, #{@lettuce.name}, #{@onion.name}, and #{@tomato.name}")
+      end
     end
   end
 end

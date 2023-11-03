@@ -60,8 +60,6 @@ RSpec.describe '/dishes/:chef_id' do
         
         expect(current_path).to eq("/dishes/#{@dish2.id}")
         expect(page).to have_content("Ingredients: #{@lettuce.name}, #{@onion.name}, and #{@tomato.name}")
-        
-        save_and_open_page
       end
     end
   end
