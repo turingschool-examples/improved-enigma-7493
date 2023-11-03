@@ -40,6 +40,5 @@ RSpec.describe "Chef index page" do
     expect(page).to have_content(@eggs.name)
     expect(page).to have_content(@peppers.name)
     expect(page).to have_content(@cheese.name)
-    save_and_open_page
   end
 end
