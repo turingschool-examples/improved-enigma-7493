@@ -4,7 +4,21 @@
 <section class="ingredients">
   <h3>Ingredients</h3>
   <% @dish.ingredients.each do | ingredient | %>
-      <p><%= ingredient.name %></p>
+    <section id="ingredient-<%= ingredient.id %>", style="display:inline-block;">
+<!--      <div style="display: inline-block">-->
+        <p><%= ingredient.name %></p>
+        <%= button_to "Remove Ingredient",
+                      dish_ingredient_path(@dish),
+                      method: :delete,
+                      data: {
+                        turbo: false,
+                      },
+                      params: {
+                        ingredient_id: ingredient.id
+                      }
+        %>
+<!--      </div>-->
+    </section>
   <% end %>
 </section>
 

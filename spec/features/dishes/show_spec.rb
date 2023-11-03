@@ -58,4 +58,23 @@ RSpec.describe "Dishes Show Page" do
 
     expect(page).to have_content "Calories: 1050"
   end
+
+  it "has a button to remove a ingredient from the dish" do
+    # As a visitor
+    # When I visit a dish's show page
+    # I see a button next to each ingredient to delete that ingredient from a dash
+    # And when I click that button
+    # I am redirected back to that page
+    # And the ingredient is no longer listed.
+    visit dish_path(@dish)
+
+    within "#ingredient-#{@marinara.id}" do
+      click_button "Remove Ingredient"
+    end
+
+    within ".ingredients" do
+      expect(page).to have_content @ground_beef.name
+      expect(page).to_not have_content @marinara.name
+    end
+  end
 end

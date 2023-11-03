@@ -24,7 +24,7 @@ RSpec.describe "Chefs show page" do
     visit chef_path(@chef)
 
     click_link "Ingredients"
-    
+
     expect(current_path).to eq(chef_ingredients_path(@chef))
 
     @chef.ingredients.each do |ingredients|
