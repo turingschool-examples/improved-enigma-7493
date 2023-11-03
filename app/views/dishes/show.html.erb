@@ -1,0 +1,9 @@
+<h2> Show Page </h2>
+
+  <p>Dish name: <%= @dish.name %></p>
+  <p>Chef: <%= @dish.chef.name %></p>
+  <p>Dish description: <%= @dish.description %></p>
+  <p>Ingredients: <% @dish.ingredients.each do |ingredient| %></p>
+    <li><%= ingredient.name %></li>
+    <% end %>
+  <p>Total calories: <%= @dish.total_calories %></p>
