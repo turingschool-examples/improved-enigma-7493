@@ -1,0 +1,28 @@
+<h1><%= @dish.name %></h1>
+
+  <section id="dish-info">
+    <p> Dish Name: <%= @dish.name %></p>
+    <p> Dish Description: <%= @dish.description %></p>
+    <p>List of Ingredients:</p>
+      <% @ingredients.each do |ingredient| %>
+        <p><%= ingredient.name %></p>
+      <% end %>
+  </section>
+  <br>
+
+  <section id="total-calories">
+    <p> Total Calories: <%= @dish.total_calories %></p>
+  </section>
+
+  <section id="the-chef">
+    <p> Chef: <%= @dish.chef.name %></p>
+  </section>
+
+  <section id="add-ingredient">
+    <h3>Add an ingredient to this dish</h3>
+      <%= form_with url: "/dishes/#{@dish.id}/ingredients", method: :post, data: { turbo: false } do |form| %>
+        <%= form.label :ingredient_id, "Ingredient ID" %>
+        <%= form.text_field :ingredient_id %>
+      <%= form.submit "Add Ingredient" %>
+    <% end %>
+  </section>
