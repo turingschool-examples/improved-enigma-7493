@@ -10,3 +10,10 @@
 
 <p>Total Calorie Count: <%= @dish.calorie_count %></p>
 <p>Created by Chef: <%= @dish.chef.name %></p>
+
+<p>Add an Existing Ingredient:</p>
+  <%= form_with url: "/dishes/#{@dish.id}/ingredients", method: :post,local: true, data: {turbo: false} do |f| %>
+    <%= f.label :ingredient_id%>
+    <%= f.text_field :ingredient_id%>
+    <%= f.submit "Add Ingredient" %>
+  <% end %>

@@ -24,6 +24,8 @@ RSpec.describe "dishes#show" do
     @ingredient10 = Ingredient.create!(name: "Carrot", calories: 20)
     @ingredient11 = Ingredient.create!(name: "Cabbage", calories: 10)
     @ingredient12 = Ingredient.create!(name: "Onion", calories: 20)
+
+    @ingredient13 = Ingredient.create!(name: "Fries", calories: 10)
     
 
     @dish_ingredient1 = DishIngredient.create!(dish: @dish1, ingredient: @ingredient1)
@@ -42,7 +44,7 @@ RSpec.describe "dishes#show" do
     @dish_ingredient12 = DishIngredient.create!(dish: @dish3, ingredient: @ingredient12)
   end
 
-  #   As a visitor
+  #  1. As a visitor
   # When I visit a dish's show page
   # I see the dish’s name and description
   # And I see a list of ingredients for that dish
@@ -50,34 +52,68 @@ RSpec.describe "dishes#show" do
   # And I see the chef's name.
 
   describe "when I visit '/dishes/:id'" do
-    it "shows all the dish's name and description" do
-      visit "/dishes/#{@dish1.id}"
+    describe "User Story 1" do
+      it "shows all the dish's name and description" do
+        visit "/dishes/#{@dish1.id}"
 
-      expect(page).to have_content(@dish1.name)
-      expect(page).to have_content("Description: #{@dish1.description}")
+        expect(page).to have_content(@dish1.name)
+        expect(page).to have_content("Description: #{@dish1.description}")
+      end
+
+      it "shows a list of ingredients for that dish" do
+        visit "/dishes/#{@dish1.id}"
+
+        expect(page).to have_content(@ingredient1.name)
+        expect(page).to have_content(@ingredient2.name)
+        expect(page).to have_content(@ingredient3.name)
+        expect(page).to have_content(@ingredient4.name)
+
+        expect(page).to_not have_content(@ingredient5.name)
+      end
+
+      it "shows a total calorie count for that dish" do
+        visit "/dishes/#{@dish1.id}"
+
+        expect(page).to have_content("Total Calorie Count: 160")
+      end
+
+      it "shows the chef's name" do
+        visit "/dishes/#{@dish1.id}"
+
+        expect(page).to have_content("Created by Chef: #{@chef1.name}")
+      end
     end
 
-    it "shows a list of ingredients for that dish" do
-      visit "/dishes/#{@dish1.id}"
+      # As a visitor
+      # When I visit a dish's show page
+      # I see a form to add an existing Ingredient to that Dish
+      # When I fill in the form with the ID of an Ingredient that exists in the database
+      # And I click Submit
+      # Then I am redirected to that dish's show page
+      # And I see that ingredient is now listed. 
+    describe "User Story 2" do
+      it "shows a form to add an existing ingredient to that dish" do
+        visit "/dishes/#{@dish1.id}"
 
-      expect(page).to have_content(@ingredient1.name)
-      expect(page).to have_content(@ingredient2.name)
-      expect(page).to have_content(@ingredient3.name)
-      expect(page).to have_content(@ingredient4.name)
+        expect(page).to have_content("Add an Existing Ingredient:")
+        expect(page).to have_field(:ingredient_id)
+        # save_and_open_page
+        expect(page).to have_button("Add Ingredient")
+      end
 
-      expect(page).to_not have_content(@ingredient5.name)
-    end
+      it "when the form is filled in with the ID of an existing ingredient and I 
+      click submit, then I am redirected to the dish's show page and I see it listed" do
+        visit "/dishes/#{@dish1.id}"
 
-    it "shows a total calorie count for that dish" do
-      visit "/dishes/#{@dish1.id}"
+        expect(page).to_not have_content(@ingredient13.name)
 
-      expect(page).to have_content("Total Calorie Count: 160")
-    end
+        fill_in(:ingredient_id, with: "#{@ingredient13.id}")
+        click_button("Add Ingredient")
 
-    it "shows the chef's name" do
-      visit "/dishes/#{@dish1.id}"
+        expect(page).to have_current_path("/dishes/#{@dish1.id}")
 
-      expect(page).to have_content("Created by Chef: #{@chef1.name}")
+        expect(page).to have_content(@ingredient13.name)
+      end
     end
   end
 end
