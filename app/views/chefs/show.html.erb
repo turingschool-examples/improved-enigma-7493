@@ -1,0 +1,4 @@
+<h2><u><%= @chef.name %></u></h2>
+<%= form_with url:"/chefs/#{@chef.id}/ingredients", method: :get, local: :true do |i| %>
+  <%= link_to "#{@chef.name}'s Ingredients", "/chefs/#{@chef.id}/ingredients" %> 
+<%end%>
