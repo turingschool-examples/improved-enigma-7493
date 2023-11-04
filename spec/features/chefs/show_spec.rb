@@ -81,6 +81,19 @@ RSpec.describe "chefs#show" do
         expect(page).to have_content(@ingredient8.name)
       end
     end
+
+    # Extension 2    As a visitor
+    # When I visit a chef's show page
+    # I see the three most popular ingredients that the chef uses in their dishes
+    # (Popularity is based off of how many dishes use that ingredient)
+    describe "Extension 2" do
+      it "shows the three most popular ingredients that the chef uses in their dishes" do
+        visit "/chefs/#{@chef1.id}"
+
+        expect(page).to have_content("#{@chef1.name}'s Most Popular Ingredients:")
+      end
+      # hit my 3 hour time box starting this one, so did not get beyond writing this test. 
+    end
   end
 end
 
