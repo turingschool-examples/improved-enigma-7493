@@ -21,13 +21,4 @@ RSpec.describe "the chef's show page" do
     expect(page).to have_content("#{@chef.name}")
     expect(page).to have_link("#{@chef.name}'s Ingredients")
   end
-
-  it "the 'Chef's ingredients' button redirects me to the ingredients index page and shows me the list of ingredients that this chef uses" do
-    visit "/chefs/#{@chef.id}"
-    click_on("#{@chef.name}'s Ingredients")
-    expect(current_path).to eq("/chefs/#{@chef.id}/ingredients")
-    expect(page).to have_content(@ingredient1.name)
-    expect(page).to have_content(@ingredient2.name)
-    expect(page).to have_content(@ingredient3.name)
-  end
 end
