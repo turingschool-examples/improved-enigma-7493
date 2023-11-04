@@ -43,8 +43,18 @@ RSpec.describe 'dish show page' do
       click_button "Add"
       expect(current_path).to eq("/chef/#{@paul.id}/dishes/#{@turkeysandwich.id}")
       expect(page).to have_content(@tomato.name)
+    end
 
-    
+    it 'has a button to delete ingredients' do
+      visit "/chef/#{@paul.id}/dishes/#{@turkeysandwich.id}"
+      expect(page).to have_content(@turkey.name)
+      expect(page).to have_content(@bread.name)
+      expect(page).to have_button("Delete #{@turkey.name}")
+      expect(page).to have_button("Delete #{@bread.name}")
+      click_button "Delete #{@bread.name}"
+      expect(current_path).to be("/chef/#{@paul.id}/dishes/#{@turkeysandwich.id}")
+      expect(page).to_not have_content(@bread.name)
+      
     end
   
   end
