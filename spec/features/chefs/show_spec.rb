@@ -36,12 +36,17 @@ RSpec.describe "chefs#show" do
     @dish_ingredient4 = DishIngredient.create!(dish: @dish2, ingredient: @ingredient4)
     @dish_ingredient5 = DishIngredient.create!(dish: @dish2, ingredient: @ingredient5)
     @dish_ingredient6 = DishIngredient.create!(dish: @dish2, ingredient: @ingredient6)
-    @dish_ingredient7 = DishIngredient.create!(dish: @dish2, ingredient: @ingredient7)    
+    @dish_ingredient7 = DishIngredient.create!(dish: @dish2, ingredient: @ingredient7)
+    @dish_ingredient8 = DishIngredient.create!(dish: @dish2, ingredient:@ingredient8)    
 
     @dish_ingredient9 = DishIngredient.create!(dish: @dish3, ingredient: @ingredient9)
     @dish_ingredient10 = DishIngredient.create!(dish: @dish3, ingredient: @ingredient10)
     @dish_ingredient11 = DishIngredient.create!(dish: @dish3, ingredient: @ingredient11)
     @dish_ingredient12 = DishIngredient.create!(dish: @dish3, ingredient: @ingredient12)
+
+    @dish_ingredient13 = DishIngredient.create!(dish: @dish2, ingredient: @ingredient1)
+    #adding this dish_ingredient to test that distinct ingredients show up on the page and there are
+    #not repeats of @ingredient1
   end
     # 3. As a visitor
     # When I visit a chef's show page
@@ -58,13 +63,14 @@ RSpec.describe "chefs#show" do
         expect(page).to have_link("All Ingredients")
       end
 
-      xit "shows all the chef's ingredients used in all their dishes" do
+      it "shows all the chef's ingredients used in all their dishes" do
         visit "/chefs/#{@chef1.id}"
 
         click_link("All Ingredients")
 
         expect(current_path).to eq("/chefs/#{@chef1.id}/ingredients")
 
+        expect(page).to have_content("#{@chef1.name}'s Ingredients Index")
         expect(page).to have_content(@ingredient1.name)
         expect(page).to have_content(@ingredient2.name)
         expect(page).to have_content(@ingredient3.name)
