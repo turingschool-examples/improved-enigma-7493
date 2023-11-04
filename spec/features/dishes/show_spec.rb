@@ -54,10 +54,10 @@ RSpec.describe "dishes#show" do
       visit "/dishes/#{@dish1.id}"
 
       expect(page).to have_content(@dish1.name)
-      expect(page).to have_content(@dish1.description)
+      expect(page).to have_content("Description: #{@dish1.description}")
     end
 
-    xit "shows a list of ingredients for that dish" do
+    it "shows a list of ingredients for that dish" do
       visit "/dishes/#{@dish1.id}"
 
       expect(page).to have_content(@ingredient1.name)
@@ -65,10 +65,10 @@ RSpec.describe "dishes#show" do
       expect(page).to have_content(@ingredient3.name)
       expect(page).to have_content(@ingredient4.name)
 
-      exepct(page).to_not have_content(@ingredient5.name)
+      expect(page).to_not have_content(@ingredient5.name)
     end
 
-    xit "shows a total calorie count for that dish" do
+    it "shows a total calorie count for that dish" do
       visit "/dishes/#{@dish1.id}"
 
       expect(page).to have_content("Total Calorie Count: 160")
