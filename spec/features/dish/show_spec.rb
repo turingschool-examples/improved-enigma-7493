@@ -33,6 +33,7 @@ RSpec.describe 'dish show page' do
       visit "/chef/#{@prue.id}/dishes/#{@scone.id}"
       expect(page).to have_content(@blueberry.name)
       expect(page).to have_content(@flour.name)
+      expect(page).to have_content(@scone.calories)
     end
 
     it 'has a form to add ingredients' do

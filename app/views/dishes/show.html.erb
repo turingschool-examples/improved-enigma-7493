@@ -4,10 +4,10 @@
 <p>Description: <%= @dish.description %> </p>
 <p>Ingredients: 
   <%  @dish.ingredients.each do |ingredient| %>
-  <%= ingredient.name %>
-  calories: <%= ingredient.calories %>
+  <%= ingredient.name  %> </b>
   <% end %>
 </p>
+<p>Total Calories: <%= @dish.calories %></p>
 
 <%= form_with url: "/chef/#{@dish.chef.id}/dishes/#{@dish.id}", method: :patch, local: true, data: { turbo:false } do |form| %>
 <%= form.label :add_ingredient %>
