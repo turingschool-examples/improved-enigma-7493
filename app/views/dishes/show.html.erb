@@ -8,3 +8,9 @@
   calories: <%= ingredient.calories %>
   <% end %>
 </p>
+
+<%= form_with url: "/chef/#{@dish.chef.id}/dishes/#{@dish.id}", method: :patch, local: true, data: { turbo:false } do |form| %>
+<%= form.label :add_ingredient %>
+<%= form.text_field :add_ingredient %>
+<%= form.submit "Add" %>
+<% end %>

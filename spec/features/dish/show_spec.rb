@@ -12,9 +12,14 @@ RSpec.describe 'dish show page' do
 
     @blueberry = Ingredient.create!(name: "blueberry", calories: 1)
     @flour = Ingredient.create!(name: "flour", calories: 455)
+    @bread = Ingredient.create!(name: "bread", calories: 160)
+    @turkey = Ingredient.create!(name: "turkey", calories: 60)
+    @tomato = Ingredient.create!(name: "tomato", calories: 22)
 
     @dish_ingredient1 = DishIngredient.create!(dish_id: @scone.id, ingredient_id: @blueberry.id)
     @dish_ingredient2 = DishIngredient.create!(dish_id: @scone.id, ingredient_id: @flour.id)
+    @dish_ingredient3 = DishIngredient.create!(dish_id: @turkeysandwich.id, ingredient_id: @turkey.id)
+    @dish_ingredient4 = DishIngredient.create!(dish_id: @turkeysandwich.id, ingredient_id: @bread.id)
 
   end
 
@@ -29,14 +34,21 @@ RSpec.describe 'dish show page' do
       expect(page).to have_content(@blueberry.name)
       expect(page).to have_content(@flour.name)
     end
+
+    it 'has a form to add ingredients' do
+      visit "/chef/#{@paul.id}/dishes/#{@turkeysandwich.id}"
+      expect(page).to_not have_content(@tomato.name)
+      save_and_open_page
+      fill_in "Add ingredient", with: "#{@tomato.id}"
+      click_button "Add"
+      expect(current_path).to eq("/chef/#{@paul.id}/dishes/#{@turkeysandwich.id}")
+      save_and_open_page
+      expect(page).to have_content(@tomato.name)
+
+    
+    end
   
   end
-  # As a visitor
-  # When I visit a dish's show page
-  # I see the dish’s name and description
-  # And I see a list of ingredients for that dish
-  # and a total calorie count for that dish
-  # And I see the chef's name.
 
 
 end
