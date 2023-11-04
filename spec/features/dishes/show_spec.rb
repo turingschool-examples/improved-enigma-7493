@@ -74,10 +74,10 @@ RSpec.describe "dishes#show" do
       expect(page).to have_content("Total Calorie Count: 160")
     end
 
-    xit "shows the chef's name" do
+    it "shows the chef's name" do
       visit "/dishes/#{@dish1.id}"
 
-      expect(page).to have_content(@chef1.name)
+      expect(page).to have_content("Created by Chef: #{@chef1.name}")
     end
   end
 end
