@@ -5,6 +5,7 @@
 @ingredient1 = Ingredient.create!(name: "Chicken", kcal: 200)
 @ingredient2 = Ingredient.create!(name: "Milk", kcal: 60)
 @ingredient3 = Ingredient.create!(name: "Flour", kcal: 30)
+@ingredient4 = Ingredient.create!(name: "Eggs", kcal: 90)
 
 @dish_ingredient_1 = DishIngredient.create!(dish_id: @dish1.id, ingredient_id: @ingredient1.id)
 @dish_ingredient_2 = DishIngredient.create!(dish_id: @dish1.id, ingredient_id: @ingredient2.id)
