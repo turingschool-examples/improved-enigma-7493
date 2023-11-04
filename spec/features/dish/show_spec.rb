@@ -14,7 +14,7 @@ RSpec.describe 'dish show page' do
 
   describe 'visit dish show page' do
     it 'shows the dishes name, calories and description' do
-      visit "/chefs/#{@paul.id}/dishes/#{@grilledcheese}"
+      visit "/chef/#{@paul.id}/dishes/#{@grilledcheese.id}"
       expect(page).to have_content(@grilledcheese.name)
       expect(page).to have_content(@grilledcheese.description)
       expect(page).to have_content(@grilledcheese.calories)
