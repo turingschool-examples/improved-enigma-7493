@@ -3,10 +3,13 @@
 <p>Description: <%= @dish.description %></p>
 
 <h2>Ingredients:</h2>
-<% @dish.ingredients.each do |ingredient| %>
-  <li><%= ingredient.name %>
-  </li>
-<% end %>
+  <% @dish.ingredients.each do |ingredient| %>
+<section id="dish_ingredient-<%= ingredient.id %>">
+    <li><%= ingredient.name %>
+    <%= button_to "Delete #{ingredient.name}", "/dishes/#{@dish.id}/ingredients/delete", params: {ingredient_id: ingredient.id}, method: :delete %>
+    </li>
+  <% end %>
+</section>
 
 <p>Total Calorie Count: <%= @dish.calorie_count %></p>
 <p>Created by Chef: <%= @dish.chef.name %></p>

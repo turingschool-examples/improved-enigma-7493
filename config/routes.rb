@@ -10,4 +10,5 @@ Rails.application.routes.draw do
   get "/dishes/:id", to: "dishes#show"
 
   post "/dishes/:dishes_id/ingredients", to: "dish_ingredients#create"
+  delete "/dishes/:dishes_id/ingredients/delete", to: "dish_ingredients#destroy"
 end

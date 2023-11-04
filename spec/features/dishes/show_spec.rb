@@ -37,6 +37,7 @@ RSpec.describe "dishes#show" do
     @dish_ingredient5 = DishIngredient.create!(dish: @dish2, ingredient: @ingredient5)
     @dish_ingredient6 = DishIngredient.create!(dish: @dish2, ingredient: @ingredient6)
     @dish_ingredient7 = DishIngredient.create!(dish: @dish2, ingredient: @ingredient7)    
+    @dish_ingredient8 = DishIngredient.create!(dish: @dish2, ingredient: @ingredient8)
 
     @dish_ingredient9 = DishIngredient.create!(dish: @dish3, ingredient: @ingredient9)
     @dish_ingredient10 = DishIngredient.create!(dish: @dish3, ingredient: @ingredient10)
@@ -113,6 +114,43 @@ RSpec.describe "dishes#show" do
         expect(page).to have_current_path("/dishes/#{@dish1.id}")
 
         expect(page).to have_content(@ingredient13.name)
+      end
+    end
+      # As a visitor
+      # When I visit a dish's show page
+      # I see a button next to each ingredient to delete that ingredient from a dish
+      # And when I click that button
+      # I am redirected back to that page
+      # And the ingredient is no longer listed.
+    describe "Extension 1" do
+      it "I see a button next to each ingredient to delete that ingredient" do
+        visit "/dishes/#{@dish1.id}"
+
+        within("#dish_ingredient-#{@ingredient1.id}") do
+          expect(page).to have_button("Delete #{@ingredient1.name}")
+        end
+        within("#dish_ingredient-#{@ingredient2.id}") do
+          expect(page).to have_button("Delete #{@ingredient2.name}")
+        end
+        within("#dish_ingredient-#{@ingredient3.id}") do
+          expect(page).to have_button("Delete #{@ingredient3.name}")
+        end
+        within("#dish_ingredient-#{@ingredient4.id}") do
+          expect(page).to have_button("Delete #{@ingredient4.name}")
+        end
+      end
+
+      it "when I click that button I am redirected back to that page and 
+      no longer see the ingredient listed" do
+        visit "/dishes/#{@dish1.id}"
+
+        within("#dish_ingredient-#{@ingredient2.id}") do
+          click_button("Delete #{@ingredient2.name}")
+        end
+
+        expect(current_path).to eq("/dishes/#{@dish1.id}")
+
+        expect(page).to_not have_content(@ingredient2.name)
       end
     end
   end
