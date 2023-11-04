@@ -39,11 +39,9 @@ RSpec.describe 'dish show page' do
     it 'has a form to add ingredients' do
       visit "/chef/#{@paul.id}/dishes/#{@turkeysandwich.id}"
       expect(page).to_not have_content(@tomato.name)
-      save_and_open_page
       fill_in "Add ingredient", with: "#{@tomato.id}"
       click_button "Add"
       expect(current_path).to eq("/chef/#{@paul.id}/dishes/#{@turkeysandwich.id}")
-      save_and_open_page
       expect(page).to have_content(@tomato.name)
 
     
