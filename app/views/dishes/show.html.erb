@@ -3,3 +3,11 @@
 <%= "Ingredients: #{@dish.list_ingredients}" %>
 <%= "Total Calories: #{@dish.total_calories}" %>
 <%= @dish.chef.name %>
+
+<section id="add_ingredient_form">
+  <%= form_with url: dish_path(@dish), method: :post, data: { turbo: false }, local: true do |form| %>
+    <%= form.label :ingredient_id %>
+    <%= form.number_field :ingredient_id %>
+    <%= form.submit "Add Ingredient" %>
+  <% end %>
+</section>
