@@ -1,4 +1,4 @@
-class DishIngredientsController < ApplicationController
+class Dishes::IngredientsController < ApplicationController
   def create
     dish = Dish.find(params[:id])
     ingredient = Ingredient.find(params[:ingredient_id])

@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   # root "articles#index"
 
   resources :dishes, only: :show
-  post "/dishes/:id/ingredients", to: "dish_ingredients#create"
+  post "/dishes/:id/ingredients", to: "dishes/ingredients#create"
   resources :chefs, only: :show do
-    resources :ingredients, only: :index
+    resources :ingredients, controller: "chefs/ingredients", only: :index
   end
 end
