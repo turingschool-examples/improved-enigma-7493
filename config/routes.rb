@@ -5,6 +5,6 @@ Rails.application.routes.draw do
   # root "articles#index"
 
   resources :dishes, only: :show
-  post "/dishes/:id/ingredients", to: "dishes/ingredients#create"
+  post "/dishes/:id/ingredients", to: "dish_ingredients#create"
   resources :chefs, only: :show
 end
