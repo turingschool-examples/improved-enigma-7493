@@ -44,6 +44,7 @@ RSpec.describe "the dish show page" do
 
     expect(current_path).to eq(dish_path(@dish_1))
     expect(page).to have_content(@ingredient_3.name)
+    expect(page).to_not have_content(@ingredient_4.name)
     expect(page).to have_content("Total Calories: 2000")
   end
 end
