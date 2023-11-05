@@ -3,4 +3,12 @@ class Dish < ApplicationRecord
   belongs_to :chef
   has_many :dish_ingredients
   has_many :ingredients, through: :dish_ingredients
+
+  def list_ingredients
+    ingredients.pluck(:name).to_sentence
+  end
+
+  def total_calories
+    ingredients.sum(:calories)
+  end
 end
