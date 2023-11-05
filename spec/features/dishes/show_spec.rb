@@ -7,6 +7,7 @@ RSpec.describe "the dishes show page" do
     @ingredient_1 = @dish_1.ingredients.create!(name: "raw ribs", calories: 1000)
     @ingredient_2 = @dish_1.ingredients.create!(name: "bbq sauce", calories: 500)
     @ingredient_3 = Ingredient.create!(name: "ranch", calories: 500)
+    @ingredient_4 = Ingredient.create!(name: "beans", calories: 500)
   end
 
   it "shows the dish's name, description, and ingredients" do
@@ -41,7 +42,7 @@ RSpec.describe "the dishes show page" do
       click_button "Add Ingredient"
     end
 
-    expect(current_path).to eq(visit dish_path(@dish_1))
+    expect(current_path).to eq(dish_path(@dish_1))
     expect(page).to have_content(@ingredient_3.name)
     expect(page).to have_content("Total Calories: 2000")
   end
