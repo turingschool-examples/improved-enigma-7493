@@ -12,6 +12,7 @@ RSpec.describe "Dish Show Page" do
 
         @ingredient1 = Ingredient.create!(name: "Steak", calories: 800)
         @ingredient2 = Ingredient.create!(name: "Potatoes", calories: 1100)
+        @ingredient3 = Ingredient.create!(name: "Asparagus", calories: 100)
 
         DishIngredient.create!(dish_id: @dish1.id, ingredient_id: @ingredient1.id)
         DishIngredient.create!(dish_id: @dish1.id, ingredient_id: @ingredient2.id)
@@ -32,6 +33,24 @@ RSpec.describe "Dish Show Page" do
           expect(page).to have_content("Total Calories: 1900")
 
           expect(page).to have_content(@chef1.name)
+        end
+      end
+
+      #User Story 2
+      describe "I see a form to add an existing ingredient to that Dish" do
+        describe "When I fill in the form with the ingredient ID and click submit" do
+          it "I am redirected to the dish's show page and I see that ingredient now listed" do
+            visit "/dishes/#{@dish1.id}"
+
+            expect(page).to_not have_content(@ingredient3.name)
+            expect(page).to have_content("Add An Ingredient To This Dish")
+
+            fill_in "Ingredient ID", with: @ingredient3.id
+            click_button "Submit"
+
+            expect(current_path).to eq "/dishes/#{@dish1.id}"
+            expect(page).to have_content(@ingredient3.name)
+          end
         end
       end
     end 
