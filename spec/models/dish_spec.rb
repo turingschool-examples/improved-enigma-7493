@@ -17,4 +17,12 @@ RSpec.describe Dish, type: :model do
       it {should have_many :ingredients}
   end
 
+  describe "Instance Methods" do 
+    describe "#total_calories" do 
+      it "finds the sum of all calories for all ingredients belonging to a dish" do 
+        expect(@dish1.total_calories).to eq(775)
+      end
+    end
+  end
+
 end
