@@ -38,7 +38,6 @@ RSpec.describe "Dishes Show" do
 
     it "at the chef ingredients index, lists the names of all dishes" do
       visit "/chefs/#{@cheflauren.id}/ingredients"
-      save_and_open_page
       @cheflauren.ingredients.each do |i|
         expect(page).to have_content(i.name)
       end
