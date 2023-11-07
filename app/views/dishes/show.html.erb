@@ -6,3 +6,9 @@
       <b>Total Calories:</b> <%= @dish.calories_total %><br>
       <b>Chef:</b> <%= link_to "#{@dish.chef.name}", "/chefs/#{@dish.chef.id}" %><br><br>
 </ol><br>
+<br>
+<%= form_with url: "/dishes/#{@dish.id}", method: :post, data: { turbo: false } do |f| %>
+<%= f.label :ingredient_id %>
+<%= f.text_field :ingredient_id, placeholder: "Add Another Ingredient" %>
+<%= f.submit 'Submit', class: 'button' %>
+<% end %>

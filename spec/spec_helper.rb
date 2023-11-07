@@ -12,6 +12,7 @@ def test_data
   @salt = Ingredient.create(name: "Salt", calories: 15)
   @vanillabean = Ingredient.create(name: "Vanilla Bean Extract", calories: 50)
   @eggyolks = Ingredient.create(name: "Egg Yolks", calories: 270)
+  @blackberries = Ingredient.create(name: "Black Berries", calories: 10)
 
   @dishingredient = DishIngredient.create(dish: @dish, ingredient: @sugar)
   @dishingredient2 = DishIngredient.create(dish: @dish, ingredient: @salt)
