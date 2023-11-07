@@ -61,4 +61,29 @@ RSpec.describe Dish, type: :feature do
 
     end
   end
+
+  describe "I see a form to add an existing ingredient to this dish" do
+    describe "When I fill in the form with the id of a ingredient that already exists in the database and I click submit" do
+      it "Then I am redirected back to that dish's show page where I see the ingredient's name now listed" do
+        visit "/dishes/#{@dish1.id}"
+        expect(page).to_not have_content("Ingredient 4")
+        fill_in(:add_ingredient, with: "#{@ingredient4.id}")
+        click_button("Add ingredient")
+        
+        expect(current_path).to eq("/dishes/#{@dish1.id}")
+        expect(page).to have_content("Ingredient 4")
+        expect(page).to_not have_content("Ingredient 5")
+        
+        visit "/dishes/#{@dish2.id}"
+        expect(page).to_not have_content("Ingredient 1")
+        fill_in(:add_ingredient, with: "#{@Ingredient1.id}")
+        click_button("Add ingredient")
+
+        expect(current_path).to eq("/dishes/#{@dish2.id}")
+        expect(page).to have_content("Ingredient 4")
+        expect(page).to_not have_content("Ingredient 6")
+        expect(page).to have_content("Ingredient 1")
+      end
+    end
+  end
 end
