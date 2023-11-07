@@ -18,7 +18,6 @@
 @dish5 = @chef2.dishes.create!(name: "Croisannt", description: "You said it wrong")
 @dish6 = @chef2.dishes.create!(name: "Cigarette", description: "Pre, during, and post meal staple")
 
-
 @ingredient1 = Ingredient.create!(name: "Rice", calories: 100)
 @ingredient2 = Ingredient.create!(name: "Banana", calories: 50)
 @ingredient3 = Ingredient.create!(name: "Cheese", calories: 250)
@@ -34,5 +33,5 @@
 @dish_ingredients4 = DishIngredient.create!(dish_id: @dish4.id, ingredient_id: @ingredient4.id)
 @dish_ingredients5 = DishIngredient.create!(dish_id: @dish5.id, ingredient_id: @ingredient5.id)
 @dish_ingredients6 = DishIngredient.create!(dish_id: @dish6.id, ingredient_id: @ingredient6.id)
-@dish_ingredients7 = DishIngredient.create!(dish_id: @dish1.id, ingredient_id: @ingredient1.id)
-@dish_ingredients8 = DishIngredient.create!(dish_id: @dish2.id, ingredient_id: @ingredient2.id)
+@dish_ingredients7 = DishIngredient.create!(dish_id: @dish1.id, ingredient_id: @ingredient5.id)
+@dish_ingredients8 = DishIngredient.create!(dish_id: @dish2.id, ingredient_id: @ingredient4.id)

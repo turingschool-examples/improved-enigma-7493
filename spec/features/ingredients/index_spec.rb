@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Dish do
+RSpec.describe Ingredient do
   before(:each) do
     @chef1 = Chef.create!(name: "Hayleigh")
 
@@ -33,53 +33,13 @@ RSpec.describe Dish do
     @dish_ingredients8 = DishIngredient.create!(dish_id: @dish2.id, ingredient_id: @ingredient4.id)
   end
 
-  it "Has a show page to show name,description,ingredients, and total calories" do
-    visit "/dishes/#{@dish4.id}"
+  it "List all ingredients that the chef cooks with" do
+    visit "/chefs/#{@chef1.id}/ingredients"
 
-    expect(page).to have_content(@dish4.name)
-    expect(page).to have_content(@dish4.description)
+    expect(page).to have_content(@ingredient1.name)
+    expect(page).to have_content(@ingredient2.name)
+    expect(page).to have_content(@ingredient3.name)
     expect(page).to have_content(@ingredient4.name)
-    expect(page).to have_content(@ingredient4.calories)
-    expect(page).to_not have_content(@ingredient8.name)
-    expect(page).to_not have_content(@ingredient8.calories)
-    expect(page).to have_content("Total Calories in This Meal: #{@dish4.total_calories}")
-    expect(page).to have_content("Total Calories in This Meal: 125")
-    
-    @dish4.ingredients << @ingredient8
-
-    visit "/dishes/#{@dish4.id}"
-    
-    expect(page).to have_content(@ingredient8.name)
-    expect(page).to have_content(@ingredient8.calories)
-    expect(page).to have_content("Total Calories in This Meal: #{@dish4.total_calories}")
-    expect(page).to have_content("Total Calories in This Meal: 400")
-  end
-
-  it "Add an ingredient to a dish via id" do
-    visit "/dishes/#{@dish4.id}"
-
-    expect(page).to have_content(@dish4.name)
-    expect(page).to have_content(@dish4.description)
-    expect(page).to have_content(@ingredient4.name)
-    expect(page).to have_content(@ingredient4.calories)
-
-    expect(page).to have_content("Total Calories in This Meal: #{@dish4.total_calories}")
-    expect(page).to have_content("Total Calories in This Meal: #{@ingredient4.calories}")
-    expect(page).to have_content("Total Calories in This Meal: 125")
-    
-    expect(page).to have_content("Ingredient id")
-    expect(page).to have_button("Submit")
-
-    fill_in(:add_ingredient, with: "#{@ingredient8.id}")
-
-    expect(page).to_not have_content(@ingredient8.name)
-    expect(page).to_not have_content(@ingredient8.calories)
-
-    click_button("Submit")
-    expect(current_path).to eq("/dishes/#{@dish4.id}")
-
-    expect(page).to have_content(@ingredient8.name)
-    expect(page).to have_content(@ingredient8.calories)
-    expect(page).to have_content("Total Calories in This Meal: #{@ingredient4.calories + @ingredient8.calories}")
+    expect(page).to have_content(@ingredient5.name)
   end
 end
