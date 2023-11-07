@@ -47,8 +47,8 @@ RSpec.describe Dish, type: :feature do
       within "#TopIngredients" do
         expect(page).to have_content("Top 3 Ingredients")
 
-        expect("Ingredient 2").to have_content("Ingredient 1")
-        expect("Ingredient 1").to have_content("Ingredient 3")
+        expect("Ingredient 2").to appear_before("Ingredient 1")
+        expect("Ingredient 1").to appear_before("Ingredient 3")
 
       end
     end
