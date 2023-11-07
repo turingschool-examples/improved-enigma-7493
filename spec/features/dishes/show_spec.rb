@@ -60,6 +60,24 @@ RSpec.describe Dish, type: :feature do
       expect(page).to have_content("Chef: Jiro")
 
     end
+
+    describe "And next to each ingredient, I see a button to delete that ingredient from a dish" do
+      it "And when I click that button I am redirected back to that page And the ingredient is no longer listed." do
+        visit "/dishes/#{@dish1.id}"
+        click_button("Delete Ingredient 1")
+        expect(page).to_not have_content("Ingredient 1")
+        expect(page).to have_content("Ingredient 2")
+        expect(page).to have_content("Ingredient 3")
+        click_button("Delete Ingredient 3")
+        expect(page).to_not have_content("Ingredient 1")
+        expect(page).to have_content("Ingredient 2")
+        expect(page).to_not have_content("Ingredient 3")
+        
+        visit "/dishes/#{@dish3.id}"
+        click_button("Delete Ingredient 6")
+        expect(page).to_not have_content("Ingredient 6")
+      end
+    end
   end
 
   describe "I see a form to add an existing ingredient to this dish" do
