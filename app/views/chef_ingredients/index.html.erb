@@ -1,0 +1,6 @@
+<h1> Chef <%= @chef.name%>'s List of Ingredients </h1>
+<p><ol> 
+    <% @ingredients.distinct.each do |i| %>
+    <li> <%= i.name %> <br></li><br>
+     <% end %>
+</ol>

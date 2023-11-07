@@ -1,10 +1,8 @@
-<h1> All Dishes </h1>
+<h1> <%= @dish.name%> </h1>
 <p><ol> 
-<% @dishes.each do |dish| %>
-<li>      <b>Dish:</b> <%= dish.name %><br>
-          <b>Description:</b> <%= dish.description %><br>
-          <b>Ingredients:</b> <%= dish.print_ingredients%><br>
-          <b>Total Calories:</b> <%= dish.calories_total %><br>
-          <b>Chef:</b> <%= dish.chef.name %><br><br>
-<% end %>
+<li>  <b>Dish:</b> <%= @dish.name %><br>
+      <b>Description:</b> <%= @dish.description %><br>
+      <b>Ingredients:</b> <%= @dish.print_ingredients%><br>
+      <b>Total Calories:</b> <%= @dish.calories_total %><br>
+      <b>Chef:</b> <%= link_to "#{@dish.chef.name}", "/chefs/#{@dish.chef.id}" %><br><br>
 </ol><br>
