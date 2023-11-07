@@ -43,9 +43,9 @@ RSpec.describe "Dish Show Page" do
             visit "/dishes/#{@dish1.id}"
 
             expect(page).to_not have_content(@ingredient3.name)
-            expect(page).to have_content("Add An Ingredient To This Dish")
+            expect(page).to have_content("Add an ingredient to this dish")
 
-            fill_in "Ingredient ID", with: @ingredient3.id
+            fill_in :ingredient_id, with: @ingredient3.id
             click_button "Submit"
 
             expect(current_path).to eq "/dishes/#{@dish1.id}"
