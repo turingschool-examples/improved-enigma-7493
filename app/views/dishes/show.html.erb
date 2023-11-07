@@ -8,7 +8,7 @@
   <%= ingredient.calories %> <br>
 <% end %>
 
-<%= "Total Calories in This Meal: #{@dish.total_calories}" %>
+<h4>Total Calories in This Meal: <%= "#{@dish.total_calories}" %></h4>
 
 <h3>Think it needs something more?</h3>
 <%= form_with url:"/dishes/#{@dish.id}", method: :patch, local: true do |f| %>

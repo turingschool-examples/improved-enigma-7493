@@ -35,7 +35,7 @@ RSpec.describe Dish do
 
   it "Has a show page to show name,description,ingredients, and total calories" do
     visit "/dishes/#{@dish4.id}"
-    
+
     expect(page).to have_content(@dish4.name)
     expect(page).to have_content(@dish4.description)
     expect(page).to have_content(@ingredient4.name)
@@ -46,8 +46,8 @@ RSpec.describe Dish do
     expect(page).to have_content("Total Calories in This Meal: 125")
     
     @dish4.ingredients << @ingredient8
+
     visit "/dishes/#{@dish4.id}"
-    # save_and_open_page
     
     expect(page).to have_content(@ingredient8.name)
     expect(page).to have_content(@ingredient8.calories)
@@ -67,5 +67,19 @@ RSpec.describe Dish do
     expect(page).to have_content("Total Calories in This Meal: #{@ingredient4.calories}")
     expect(page).to have_content("Total Calories in This Meal: 125")
     
+    expect(page).to have_content("Ingredient id")
+    expect(page).to have_button("Submit")
+
+    fill_in(:add_ingredient, with: "#{@ingredient8.id}")
+
+    expect(page).to_not have_content(@ingredient8.name)
+    expect(page).to_not have_content(@ingredient8.calories)
+
+    click_button("Submit")
+    expect(current_path).to eq("/dishes/#{@dish4.id}")
+
+    expect(page).to have_content(@ingredient8.name)
+    expect(page).to have_content(@ingredient8.calories)
+    expect(page).to have_content("Total Calories in This Meal: #{@ingredient4.calories + @ingredient8.calories}")
   end
 end
