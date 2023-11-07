@@ -49,6 +49,5 @@ RSpec.describe Dish, type: :model do
     @dish4.ingredients << @ingredient8
     expect(@dish4.ingredients).to eq([@ingredient4, @ingredient8])
     expect(@dish4.total_calories).to eq(@ingredient4.calories + @ingredient8.calories)
-
   end
 end

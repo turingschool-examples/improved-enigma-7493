@@ -54,4 +54,18 @@ RSpec.describe Dish do
     expect(page).to have_content("Total Calories in This Meal: #{@dish4.total_calories}")
     expect(page).to have_content("Total Calories in This Meal: 400")
   end
+
+  it "Add an ingredient to a dish via id" do
+    visit "/dishes/#{@dish4.id}"
+
+    expect(page).to have_content(@dish4.name)
+    expect(page).to have_content(@dish4.description)
+    expect(page).to have_content(@ingredient4.name)
+    expect(page).to have_content(@ingredient4.calories)
+
+    expect(page).to have_content("Total Calories in This Meal: #{@dish4.total_calories}")
+    expect(page).to have_content("Total Calories in This Meal: #{@ingredient4.calories}")
+    expect(page).to have_content("Total Calories in This Meal: 125")
+    
+  end
 end

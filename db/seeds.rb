@@ -26,6 +26,7 @@
 @ingredient5 = Ingredient.create!(name: "H2O", calories: 0)
 @ingredient6 = Ingredient.create!(name: "Pig", calories: 500)
 @ingredient7 = Ingredient.create!(name: "Ice Cream", calories: 890)
+@ingredient8 = Ingredient.create!(name: "Local Snail", calories: 275)
 
 @dish_ingredients1 = DishIngredient.create!(dish_id: @dish1.id, ingredient_id: @ingredient1.id)
 @dish_ingredients2 = DishIngredient.create!(dish_id: @dish2.id, ingredient_id: @ingredient2.id)
