@@ -1,6 +1,6 @@
 <h1><%= @dish.name %></h1>
 <p><%= @dish.description %></p>
-<%=  require 'pry'; binding.pry %>
+
 <h3>Ingredients</h3>
 <p><u>Name -- Calories</p></u>
 <% @dish.ingredients.each do |ingredient| %>
@@ -8,4 +8,4 @@
   <%= ingredient.calories %> <br>
 <% end %>
 
-<%= "Total Calories in This Meal" %>
+<%= "Total Calories in This Meal: #{@dish.total_calories}" %>
