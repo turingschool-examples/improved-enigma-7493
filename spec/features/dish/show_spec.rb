@@ -31,18 +31,27 @@ RSpec.describe Dish do
     @dish_ingredients6 = DishIngredient.create!(dish_id: @dish6.id, ingredient_id: @ingredient6.id)
     @dish_ingredients7 = DishIngredient.create!(dish_id: @dish1.id, ingredient_id: @ingredient1.id)
     @dish_ingredients8 = DishIngredient.create!(dish_id: @dish2.id, ingredient_id: @ingredient2.id)
-    @dish_ingredients9 = DishIngredient.create!(dish_id: @dish4.id, ingredient_id: @ingredient8.id)
   end
 
   it "Has a show page to show name,description,ingredients, and total calories" do
     visit "/dishes/#{@dish4.id}"
-
+    
     expect(page).to have_content(@dish4.name)
     expect(page).to have_content(@dish4.description)
     expect(page).to have_content(@ingredient4.name)
     expect(page).to have_content(@ingredient4.calories)
-    # expect(page).to have_content(@ingredient8.name)
-    # expect(page).to have_content(@ingredient8.calories)
+    expect(page).to_not have_content(@ingredient8.name)
+    expect(page).to_not have_content(@ingredient8.calories)
     expect(page).to have_content("Total Calories in This Meal: #{@dish4.total_calories}")
+    expect(page).to have_content("Total Calories in This Meal: 125")
+    
+    @dish4.ingredients << @ingredient8
+    visit "/dishes/#{@dish4.id}"
+    # save_and_open_page
+    
+    expect(page).to have_content(@ingredient8.name)
+    expect(page).to have_content(@ingredient8.calories)
+    expect(page).to have_content("Total Calories in This Meal: #{@dish4.total_calories}")
+    expect(page).to have_content("Total Calories in This Meal: 400")
   end
 end
