@@ -4,5 +4,12 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
 
-  get '/dishes/:id', to: 'dishes#show'
+  # get '/dishes/:id', to: 'dishes#show'
+  resources :dishes, only: [:show] do
+    resources :ingredients, controller: 'dish_ingredients', only: [:create]
+  end
+
+  # oops, should have named it dish_ingredients for the controller
+  
+  # post '/dishes/:dish_id/ingredients', to: 'ingredient_dishes#create'
 end

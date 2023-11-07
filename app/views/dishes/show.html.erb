@@ -12,3 +12,10 @@
 
 <h2>Calories</h2>
 <p>Total Calories: <%= @dish.total_calories %></p>
+
+<%= form_with url: dish_ingredients_path(@dish), method: :post, data: { turbo: false } do |f| %>
+  <%= f.label :ingredient %>
+  <%= f.text_field :ingredient %>
+
+  <%= f.submit "Submit" %>
+<% end %>
