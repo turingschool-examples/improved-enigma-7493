@@ -10,9 +10,9 @@ RSpec.describe "chef show", type: :feature do
     it 'They see a link, click it, and are taken to a chefs ingredients index page' do
       expect(page).to have_selector(:link_or_button, "Chef Ingredients")
 
-      click_button("Chef Ingredients")
+      click_link("Chef Ingredients")
 
-      expect(current_path).to eq(chef_ingredients(@chef_1))
+      expect(current_path).to eq(chef_ingredients_path(@chef_1))
     end
 
   end
