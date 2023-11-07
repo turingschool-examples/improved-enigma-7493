@@ -31,5 +31,27 @@ RSpec.describe Dish, type: :feature do
         expect(page).to have_content("Ingredient 6")
       end
     end
+
+    it "I see the three most popular ingredients that the chef uses in their dishes" do
+      @dish4 = @chef1.dishes.create!(name: "Dish 4", description: "aaaaa")
+      @dish5 = @chef1.dishes.create!(name: "Dish 5", description: "bbbbb")
+      @dish6 = @chef1.dishes.create!(name: "Dish 6", description: "bbbbb")
+      @dish4.ingredients << @ingredient1
+      @dish4.ingredients << @ingredient2
+      @dish4.ingredients << @ingredient3
+      @dish5.ingredients << @ingredient1
+      @dish5.ingredients << @ingredient2
+      @dish6.ingredients << @ingredient2
+
+      visit "/chefs/#{@chef1.id}"
+      within "#TopIngredients" do
+        expect(page).to have_content("Top 3 Ingredients")
+
+        expect("Ingredient 2").to have_content("Ingredient 1")
+        expect("Ingredient 1").to have_content("Ingredient 3")
+
+      end
+    end
   end
+
 end
