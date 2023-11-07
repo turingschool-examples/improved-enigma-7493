@@ -1,0 +1,64 @@
+require "rails_helper"
+
+RSpec.describe Dish, type: :feature do
+  before :each do
+    @chef1 = Chef.create!(name: "Bobby Flay")
+    @chef2 = Chef.create!(name: "Jiro")
+    @dish1 = @chef1.dishes.create!(name: "Dish 1", description: "aaaaa")
+    @dish2 = @chef1.dishes.create!(name: "Dish 2", description: "bbbbb")
+    @dish3 = @chef2.dishes.create!(name: "Dish 3", description: "ccccc")
+    @ingredient1 = @dish1.ingredients.create!(name: "Ingredient 1", calories: 1)
+    @ingredient2 = @dish1.ingredients.create!(name: "Ingredient 2", calories: 2)
+    @ingredient3 = @dish1.ingredients.create!(name: "Ingredient 3", calories: 3)
+    @ingredient4 = @dish2.ingredients.create!(name: "Ingredient 4", calories: 4)
+    @ingredient5 = @dish2.ingredients.create!(name: "Ingredient 5", calories: 5)
+    @ingredient6 = @dish3.ingredients.create!(name: "Ingredient 6", calories: 7)
+  end
+
+
+  describe "As a visitor, when I visit the dish's show page" do
+    it "I see the dish's name and description" do
+      visit "/dishes/#{@dish1.id}"
+      
+      expect(page).to have_content("Dish 1")
+      expect(page).to have_content("aaaaa")
+      
+      visit "/dishes/#{@dish3.id}"
+      expect(page).to have_content("Dish 3")
+      expect(page).to have_content("ccccc")
+
+    end
+    
+    it "And I see a list of ingredients for that dish" do
+      visit "/dishes/#{@dish1.id}"
+      expect(page).to have_content("Ingredient List:")
+      expect(page).to have_content("Ingredient 1")
+      expect(page).to have_content("Ingredient 2")
+      expect(page).to have_content("Ingredient 3")
+      
+      visit "/dishes/#{@dish3.id}"
+      expect(page).to have_content("Ingredient List:")
+      expect(page).to have_content("Ingredient 6")
+    end
+
+    it "And I see a total calorie count for that dish" do
+      visit "/dishes/#{@dish1.id}"
+
+      expect(page).to have_content("Calorie Count: 6")
+      
+      visit "/dishes/#{@dish3.id}"
+      expect(page).to have_content("Calorie Count: 7")
+
+    end
+
+    it "And I see the Chef's name" do
+      visit "/dishes/#{@dish1.id}"
+
+      expect(page).to have_content("Chef: Bobby Flay")
+      
+      visit "/dishes/#{@dish3.id}"
+      expect(page).to have_content("Chef: Jiro")
+
+    end
+  end
+end
