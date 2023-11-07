@@ -2,3 +2,7 @@
 
 <p><%= @chef.name %>'s ingredents</p>
 <p><%= link_to "View All Ingredients", "/chefs/#{@chef.id}/ingredients" %></p>
+
+<p>Popular ingredients: <% @chef.popular_ingredients.each do |ing| %></p>
+<p><%= ing.name %></p>
+<% end %>
