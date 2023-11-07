@@ -4,6 +4,23 @@
 # this file to always be loaded, without a need to explicitly require it in any
 # files.
 #
+def test_data
+  @cheflauren = Chef.create(name: "Lauren")
+  @dish = @cheflauren.dishes.create(name: "Croquembouche", description: "Alternative to a French wedding cake with pastry puffs filled with pastry cream")
+  @dish2 = @cheflauren.dishes.create(name: "Creme Brulee", description: "Pure crema made of vanilla bean extract and finished with a hot iron press")
+  @sugar = Ingredient.create(name: "Sugar", calories: 80)
+  @salt = Ingredient.create(name: "Salt", calories: 15)
+  @vanillabean = Ingredient.create(name: "Vanilla Bean Extract", calories: 50)
+  @eggyolks = Ingredient.create(name: "Egg Yolks", calories: 270)
+
+  @dishingredient = DishIngredient.create(dish: @dish, ingredient: @sugar)
+  @dishingredient2 = DishIngredient.create(dish: @dish, ingredient: @salt)
+  @dishingredient3 = DishIngredient.create(dish: @dish2, ingredient: @sugar)
+  @dishingredient4 = DishIngredient.create(dish: @dish2, ingredient: @salt)
+  @dishingredient5 = DishIngredient.create(dish: @dish2, ingredient: @vanillabean)
+  @dishingredient6 = DishIngredient.create(dish: @dish2, ingredient: @eggyolks)
+end
+
 # Given that it is always loaded, you are encouraged to keep this file as
 # light-weight as possible. Requiring heavyweight dependencies from this file
 # will add to the boot time of your test suite on EVERY test run, even for an
