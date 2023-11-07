@@ -2,3 +2,12 @@
 <%=@dish.description%>
 <%=@dish.calories%>
 <%=@dish.chef.name%>
+<%@dish.ingredients.each do |ingredient|%>
+<%= ingredient.name %>
+<%end%>
+<%= form_with url: "#{@dish.id}", method: :patch, local: true, data: { turbo: false } do |form| %>
+  <%= form.label :ingredient_id %>
+  <%= form.text_field :ingredient_id %>
+
+  <%= form.submit "Add Ingredient" %>
+<% end %>
