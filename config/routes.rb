@@ -5,5 +5,7 @@ Rails.application.routes.draw do
   # root "articles#index"
   get "/dishes/:id", to: "dishes#show"
   patch "/dishes/:id", to: "dish_ingredients#new"
-
+  
+  get "/chefs/:id", to: "chefs#show"
+  get "/chefs/:id/ingredients", to: "chefs/ingredients#index"
 end

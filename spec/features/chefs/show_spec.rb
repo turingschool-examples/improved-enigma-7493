@@ -25,9 +25,9 @@ RSpec.describe Dish, type: :feature do
         expect(page).to have_content("Ingredient 2")
         expect(page).to have_content("Ingredient 3")
 
-        visit "/chefs/#{@chef3.id}"
+        visit "/chefs/#{@chef2.id}"
         click_link("All ingredients used by chef")
-        expect(current_path).to eq("/chefs/#{@chef3.id}/ingredients")
+        expect(current_path).to eq("/chefs/#{@chef2.id}/ingredients")
         expect(page).to have_content("Ingredient 6")
       end
     end
