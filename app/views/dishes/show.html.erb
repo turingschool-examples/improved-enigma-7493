@@ -4,6 +4,13 @@
 <%= ingredient.name %>
 <% end %>
 </p>
-
 <p>Total Calories: <%= @dish.total_calories %></p>
 <p>Chef <%= @dish.chef.name %></p>
+
+<section id="add_ingredients">
+<%= form_with url: "/dishes/#{@dish.id}/dish_ingredients", method: :post, data: { turbo: false } do |f| %>
+<%= f.label :ingredient_id %>
+<%= f.text_field :ingredient_id %>
+<%= f.submit "Submit" %>
+<% end %>
+</section>
