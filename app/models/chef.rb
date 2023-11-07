@@ -3,13 +3,6 @@ class Chef < ApplicationRecord
   has_many :dishes
 
   def uniq_ingredients
-    ingredients = []
-
-    dishes.each do |dish|
-      dish.ingredients.each do |ingredient|
-        ingredients << ingredient.name
-      end
-    end
-    ingredients.uniq
+    Ingredient.distinct.pluck(:name)
   end
 end
