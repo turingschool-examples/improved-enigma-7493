@@ -76,7 +76,7 @@ RSpec.describe Dish, type: :feature do
         
         visit "/dishes/#{@dish2.id}"
         expect(page).to_not have_content("Ingredient 1")
-        fill_in(:add_ingredient, with: "#{@Ingredient1.id}")
+        fill_in(:add_ingredient, with: "#{@ingredient1.id}")
         click_button("Add ingredient")
 
         expect(current_path).to eq("/dishes/#{@dish2.id}")

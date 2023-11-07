@@ -10,3 +10,9 @@
 
 <p><%= "Calorie Count: #{@dish.calorie_count}" %></p>
 
+
+<%= form_with url: "/dishes/#{@dish.id}", method: :patch, local: :true do |f| %>
+  <%= f.text_field :add_ingredient %>
+  <%= f.submit "Add ingredient" %>
+<% end %>
+
