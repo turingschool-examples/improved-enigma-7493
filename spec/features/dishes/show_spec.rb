@@ -18,9 +18,15 @@ RSpec.describe "dish show", type: :feature do
       visit "/dishes/#{@dish_1.id}"
     end
 
-    it 'They see dishes name and description' do
+    it 'They see dishes name and description and chefs name' do
       expect(page).to have_content("Vegetable Soup")
       expect(page).to have_content("Description: It has veggies")
+    end
+
+    it 'They see a list of ingredients ant total calorie count for that dish' do
+      save_and_open_page
+      expect(page).to have_content("Ingredients: Carrot Celery Onion")
+      expect(page).to have_content("Total Calories: 90")
     end
   end
 
