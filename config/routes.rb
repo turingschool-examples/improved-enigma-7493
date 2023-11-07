@@ -9,7 +9,10 @@ Rails.application.routes.draw do
     resources :ingredients, controller: 'dish_ingredients', only: [:create]
   end
 
+  resources :chef, controller: 'chefs', only: [:show] do
+    resources :ingredients, controller: 'chef_ingredients', only: [:index]
+  end
+
   # oops, should have named it dish_ingredients for the controller
-  
   # post '/dishes/:dish_id/ingredients', to: 'ingredient_dishes#create'
 end

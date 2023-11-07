@@ -1,16 +1,7 @@
-require 'rails_helper'
+require "rails_helper"
 
-RSpec.describe Chef, type: :model do
-
-  describe "validations" do
-      it {should validate_presence_of :name}
-  end
-
-  describe "relationships" do
-      it {should have_many :dishes}
-  end
-
-  describe '#instance methods' do
+RSpec.describe "chef ingredients index", type: :feature do
+  describe 'When a user visits a chef ingredients show page, there is information' do
     before(:each) do
       @chef_1 = Chef.create!(name: "Sam")
       @chef_2 = Chef.create!(name: "Max")
@@ -32,13 +23,20 @@ RSpec.describe Chef, type: :model do
       @dish_2.ingredients << @ingredient_4
       # Will not see this ingredient
       @dish_3.ingredients << @ingredient_5
+
+      visit chef_ingredients_path(@chef_1)
     end
 
-    describe '#unique_ingredients_used' do
-      it 'returns unique list of ingredients used by a chef' do
-        expect(@chef_1.unique_ingredients_used).to eq([@ingredient_1, @ingredient_2, @ingredient_3, @ingredient_4])
-        expect(@chef_2.unique_ingredients_used).to eq([@ingredient_5])
-      end
+    it 'They will not see ingredients used by another chef' do
+      expect(page).to_not have_content("Beef")
+    end
+
+    it 'They will see a unique list of ingredients used by this chef' do
+      expect(page).to have_content("Carrot", count: 1)
+      expect(page).to have_content("Celery", count: 1)
+      expect(page).to have_content("Onion", count: 1)
+      expect(page).to have_content("Pasta", count: 1)
     end
   end
+
 end
