@@ -7,7 +7,7 @@
 <%= "Total Calories: #{@dish.total_calories}" %><br>
 <%= @dish.chef.name %><br>
 
-<%= form_with url: "/dishes/#{@dish.id}", method: :patch, data: { turbo: false } do |form| %>
+<%= form_with url: "/dishes/#{@dish.id}", method: :post, data: { turbo: false } do |form| %>
   <%= form.label "Add an ingredient to this dish" %>
   <%= form.text_field :ingredient_id %>
   <%= form.submit "Submit" %>

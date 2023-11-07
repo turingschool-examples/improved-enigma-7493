@@ -17,6 +17,7 @@ RSpec.describe "Dish Show Page" do
         DishIngredient.create!(dish_id: @dish1.id, ingredient_id: @ingredient1.id)
         DishIngredient.create!(dish_id: @dish1.id, ingredient_id: @ingredient2.id)
         
+        
       end
 
       #User Story 1
