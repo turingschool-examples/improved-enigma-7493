@@ -5,4 +5,8 @@ class Chef < ApplicationRecord
   def unique_ingredients_used
     Ingredient.joins(:ingredient_dishes).joins(:dishes).where("dishes.chef_id = ?", self.id).distinct
   end
+
+  def top_three_ingredients
+    
+  end
 end
