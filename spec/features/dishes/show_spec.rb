@@ -44,7 +44,7 @@ RSpec.describe 'Dishes Show Page', type: :feature do
       expect(page).to have_content("Calorie Count: 550")
       expect(page).to have_content("Chef: Miranda Delaney")
 
-      visit "/dishes/#{@dish1.id}"
+      visit "/dishes/#{@dish2.id}"
 
       expect(page).to have_content("Calorie Count: 500")
       expect(page).to have_content("Chef: John Doe")
