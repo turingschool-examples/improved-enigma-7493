@@ -36,7 +36,6 @@ RSpec.describe "Chef Show Page", type: :feature do
     expect(page).to have_content("Sauce")
     expect(page).to have_content("Salmon")
     expect(page).to have_content("Tuna")
-    save_and_open_page
     expect(@chef1.all_ingredients.length).to eq(5)
   end
 end

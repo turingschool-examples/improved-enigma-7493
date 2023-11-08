@@ -5,7 +5,6 @@ class Chef < ApplicationRecord
 
    def all_ingredients
     self.dishes.joins(:ingredients)
-    .select('ingredients.name')
     .distinct
     .pluck('ingredients.name')
    end
