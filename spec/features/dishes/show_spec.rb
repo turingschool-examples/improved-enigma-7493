@@ -44,4 +44,21 @@ RSpec.describe "Dishes Show" do
     end
   end
 
+  describe "#EXTENSION 1/2" do
+    it "has a delete button next to each ingredient" do
+      visit "/dishes/#{@dish2.id}"
+      ingredient_count = @dish2.ingredients.length
+      expect(page).to have_selector('button', text: 'Delete', count: ingredient_count)
+    end
+
+    it "can delete a specific ingredient when clicked on" do
+      visit "/dishes/#{@dish2.id}"
+      within("#ingredient-#{@sugar.id}") do
+      click_button "Delete"
+      expect(current_path).to eq("/dishes/#{@dish2.id}")
+      expect(page).to_not have_content("Sugar")
+      end
+    end
+  end
+
 end
