@@ -22,8 +22,6 @@ RSpec.describe Dish, type: :feature do
     DishIngredient.create(dish_id: @dish2.id, ingredient_id: @ingredient5.id)
     DishIngredient.create(dish_id: @dish2.id, ingredient_id: @ingredient6.id)
 
-
-    
     
   end
   describe "dish show page" do
