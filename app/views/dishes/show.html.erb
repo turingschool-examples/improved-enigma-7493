@@ -1,0 +1,16 @@
+<h1>Dish</h1>
+
+<p>Name: <%= @dish.name %> </p>
+<p>Description: <%= @dish.description %> </p>
+<p>Ingredients: 
+  <%  @dish.ingredients.each do |ingredient| %>
+  <%= ingredient.name  %> <%= button_to "Remove #{ingredient.name}", "/chef/#{@chef.id}/dishes/#{@dish.id}/ingredients/#{ingredient.id}", method: :delete %> </b>
+  <% end %>
+</p>
+<p>Total Calories: <%= @dish.calories %></p>
+
+<%= form_with url: "/chef/#{@dish.chef.id}/dishes/#{@dish.id}", method: :patch, local: true, data: { turbo:false } do |form| %>
+<%= form.label :add_ingredient %>
+<%= form.text_field :add_ingredient %>
+<%= form.submit "Add" %>
+<% end %>
