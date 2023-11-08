@@ -1,43 +1,45 @@
 require "rails_helper"
 
-RSpec.describe "Dishes Show Page", type: :model do 
+RSpec.describe "Dishes Show Page", type: :feature do
+
   before :each do 
 
     @mario = Chef.create!({name: "Mario"})
-    @luigi = Chef.create!({name: "Luigi"})
-
-    @lasagna = Dish.create!({name: "Lasagna", description: "Chef favorite"})
-    @sushi = Dish.create!({name: "Sushi", description: "Flown in daily"})
-
+    
+    @lasagna = Dish.create!({name: "Lasagna", description: "Chef's favorite", chef_id: @mario.id })
+    
     @salt = Ingredient.create!({name: "Salt", calories: 200})
     @pepper = Ingredient.create!({name: "Pepper", calories: 25})
     @oregano = Ingredient.create!({name: "Oregano", calories: 75})
-
-    @salted_lasagna = DishIngredient.create!({ dish_id: @lasgna.id, ingredient_id: @salt.id })
-    @peppered_lasagna = DishIngredient.create!({ dish_id: @lasgna.id, ingredient_id: @pepper.id })
-    @oregano_lasagna = DishIngredient.create!({ dish_id: @lasgna.id, ingredient_id: @oregano.id })
-    @salted_sushi = DishIngredient.create!({ dish_id: @sushi.id, ingredient_id: @salt.id})
+    DishIngredient.create!({ dish_id: @lasagna.id, ingredient_id: @salt.id })
+    DishIngredient.create!({ dish_id: @lasagna.id, ingredient_id: @pepper.id })
   end
-
   
   it "shows the dish's name and description" do
 
-    visit "/dishes/index"
+    visit "/dishes/#{@lasagna.id}"
+
+    expect(page).to have_content("Lasagna")
+    expect(page).to have_content("Pepper")
+    expect(page).to have_content("Salt")
+    expect(page).to have_content("Mario")
+  end
   
-    within "#index-#{@lasagna.id}" do
-      expect(page).to have_content("Lasagna")
-      expect(page).to have_content("Pepper")
-      expect(page).to have_content("Oregano")
-      expect(page).to have_content("Total Calories")
-      expect(page).to have_content("Mario")
-      
-    end
-  
-    within "#sush-#{@sushi.id}" do
-      expect(page).to have_content("Sushi")
-      expect(page).to have_content("Salt")
-      expect(page).to have_content("Total Calories")
-      expect(page).to have_content("Luigi")
-    end
+  it "has a form to add existing ingredients to the dish" do
+    
+    visit "/dishes/#{@lasagna.id}"
+    expect(page).to have_content("Add ingredient")
+    expect(page).to have_field(:ingredient_id)
+    expect(page).to have_button("Submit")
+    fill_in :ingredient_id, with: @oregano.id
+    
+    click_button "Submit"
+    
+    visit "/dishes/#{@lasagna.id}"
+    save_and_open_page
+    
+    expect(page).to have_content("Pepper")
+    expect(page).to have_content("Salt")
+    expect(page).to have_content("Oregano")
   end
 end 
