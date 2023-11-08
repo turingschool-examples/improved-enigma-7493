@@ -69,15 +69,17 @@ RSpec.describe 'Dish Show Page' do
       # And I see that ingredient is now listed. 
       
       visit dish_path(@dish_1)
-      save_and_open_page
+      
       expect(page).to have_content("Add an Ingredient to this Dish")
 
       fill_in :ingredient_id, with: @ingredient_3.id
+
       click_on "Submit"
+
       expect(current_path).to eq(dish_path(@dish_1))
-      within("#ingredients-#{dish_1.id}") do
+      
       expect(page).to have_content(@ingredient_3.name)
-      end
+      
     end
   end
 end

@@ -1,6 +1,8 @@
-<%= form_with url: dish_path, method: :post, data: {turbo: false}, local: true do |form| %>
- <p> <%= form.label :name %>
-  <%= form.text_field :name, placeholder: "ex. banana" %></p>
-  <%= form.submit "Submit" %>
-  <% end %>
+<%= form_with url: dish_ingredients_path, method: :post do |form| %>
+  <h3>Add an Ingredient to this Dish</h3>
+  <%= form.hidden_field :dish_id, value: @dish.id %>
+  <%= form.label :ingredient_id, 'Ingredient ID' %>
+  <%= form.text_field :ingredient_id %>
+  <%= form.submit 'Submit' %>
+<% end %>
   
