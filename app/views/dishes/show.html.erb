@@ -4,7 +4,7 @@
 <p>Description: <%= @dish.description %> </p>
 <p>Ingredients: 
   <%  @dish.ingredients.each do |ingredient| %>
-  <%= ingredient.name  %> </b>
+  <%= ingredient.name  %> <%= button_to "Remove #{ingredient.name}", "/chef/#{@chef.id}/dishes/#{@dish.id}/ingredients/#{ingredient.id}", method: :delete %> </b>
   <% end %>
 </p>
 <p>Total Calories: <%= @dish.calories %></p>

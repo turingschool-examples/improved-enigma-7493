@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   # root "articles#index"
   get "/chef/:id", to: "chef#show"
   get "/chef/:id/ingredients", to: "ingredients#index"
+  post "/chef/:id/dishes/:id", to: "dish_ingredient#destroy"
+  delete "/chef/:id/dishes/:id/ingredients/:id", to: "dish_ingredients#destroy", as: :remove
 
   resources :chef, only: [:show, :create] do
     resources :dishes, only: [:show, :create, :update]

@@ -10,16 +10,19 @@ RSpec.describe 'dish show page' do
     @cake = @prue.dishes.create!(name: "Chocolate Cake", description: "Delicious")
     @scone = @prue.dishes.create!(name: "Blueberry Scone", description: "ehh")
 
-    @blueberry = Ingredient.create!(name: "blueberry", calories: 1)
-    @flour = Ingredient.create!(name: "flour", calories: 455)
-    @bread = Ingredient.create!(name: "bread", calories: 160)
-    @turkey = Ingredient.create!(name: "turkey", calories: 60)
+    @blueberry = @scone.ingredients.create!(name: "blueberry", calories: 1)
+    @flour = @scone.ingredients.create!(name: "flour", calories: 455)
+    @bread = @turkeysandwich.ingredients.create!(name: "bread", calories: 160)
+    @turkey = @turkeysandwich.ingredients.create!(name: "turkey", calories: 60)
     @tomato = Ingredient.create!(name: "tomato", calories: 22)
 
-    @dish_ingredient1 = DishIngredient.create!(dish_id: @scone.id, ingredient_id: @blueberry.id)
-    @dish_ingredient2 = DishIngredient.create!(dish_id: @scone.id, ingredient_id: @flour.id)
-    @dish_ingredient3 = DishIngredient.create!(dish_id: @turkeysandwich.id, ingredient_id: @turkey.id)
-    @dish_ingredient4 = DishIngredient.create!(dish_id: @turkeysandwich.id, ingredient_id: @bread.id)
+
+
+
+    # @dish_ingredient1 = DishIngredient.create!(dish_id: @scone.id, ingredient_id: @blueberry.id)
+    # @dish_ingredient2 = DishIngredient.create!(dish_id: @scone.id, ingredient_id: @flour.id)
+    # @dish_ingredient3 = DishIngredient.create!(dish_id: @turkeysandwich.id, ingredient_id: @turkey.id)
+    # @dish_ingredient4 = DishIngredient.create!(dish_id: @turkeysandwich.id, ingredient_id: @bread.id)
 
   end
 
@@ -49,9 +52,10 @@ RSpec.describe 'dish show page' do
       visit "/chef/#{@paul.id}/dishes/#{@turkeysandwich.id}"
       expect(page).to have_content(@turkey.name)
       expect(page).to have_content(@bread.name)
-      expect(page).to have_button("Delete #{@turkey.name}")
-      expect(page).to have_button("Delete #{@bread.name}")
-      click_button "Delete #{@bread.name}"
+      expect(page).to have_button("Remove #{@turkey.name}")
+      expect(page).to have_button("Remove #{@bread.name}")
+      click_button "Remove #{@bread.name}"
+      require 'pry'; binding.pry
       expect(current_path).to be("/chef/#{@paul.id}/dishes/#{@turkeysandwich.id}")
       expect(page).to_not have_content(@bread.name)
       
