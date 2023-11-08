@@ -6,20 +6,31 @@
 #
 def test_data
   @cheflauren = Chef.create(name: "Lauren")
+
   @dish = @cheflauren.dishes.create(name: "Croquembouche", description: "Alternative to a French wedding cake with pastry puffs filled with pastry cream")
   @dish2 = @cheflauren.dishes.create(name: "Creme Brulee", description: "Pure crema made of vanilla bean extract and finished with a hot iron press")
+  @dish3 = @cheflauren.dishes.create(name: "Ile Flottante", description: "Floating island of toasted coconut meringue on a bed of vanilla custard and drizzled with blackberry pomegranate couile")
+  @dish4 = @cheflauren.dishes.create(name: "Grand Marnier Souffle", description: "A parachute baked souffle made with eggy notes and drizzled with vanilla custard and topped with chantilly")
+
   @sugar = Ingredient.create(name: "Sugar", calories: 80)
   @salt = Ingredient.create(name: "Salt", calories: 15)
   @vanillabean = Ingredient.create(name: "Vanilla Bean Extract", calories: 50)
   @eggyolks = Ingredient.create(name: "Egg Yolks", calories: 270)
   @blackberries = Ingredient.create(name: "Blackberries", calories: 10)
 
-  @dishingredient = DishIngredient.create(dish: @dish, ingredient: @sugar)
-  @dishingredient2 = DishIngredient.create(dish: @dish, ingredient: @salt)
-  @dishingredient3 = DishIngredient.create(dish: @dish2, ingredient: @sugar)
-  @dishingredient4 = DishIngredient.create(dish: @dish2, ingredient: @salt)
-  @dishingredient5 = DishIngredient.create(dish: @dish2, ingredient: @vanillabean)
-  @dishingredient6 = DishIngredient.create(dish: @dish2, ingredient: @eggyolks)
+  DishIngredient.create(dish: @dish, ingredient: @sugar)
+  DishIngredient.create(dish: @dish, ingredient: @salt)
+  DishIngredient.create(dish: @dish, ingredient: @vanillabean)
+  DishIngredient.create(dish: @dish2, ingredient: @sugar)
+  DishIngredient.create(dish: @dish2, ingredient: @vanillabean)
+  DishIngredient.create(dish: @dish2, ingredient: @eggyolks)
+  DishIngredient.create(dish: @dish3, ingredient: @blackberries)
+  DishIngredient.create(dish: @dish3, ingredient: @vanillabean)
+  DishIngredient.create(dish: @dish3, ingredient: @sugar)
+  DishIngredient.create(dish: @dish4, ingredient: @sugar)
+  DishIngredient.create(dish: @dish4, ingredient: @eggyolks)
+  DishIngredient.create(dish: @dish4, ingredient: @vanillabean)
+
 end
 
 # Given that it is always loaded, you are encouraged to keep this file as

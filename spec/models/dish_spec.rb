@@ -16,7 +16,7 @@ RSpec.describe Dish, type: :model do
 
   describe "#calories_total" do
     it "can print the total calories in a dish" do
-      expect(@dish2.calories_total).to eq(415)
+      expect(@dish2.calories_total).to eq(400)
     end
   end
 
