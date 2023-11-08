@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   # get '/dishes/:id', to: 'dishes#show'
   resources :dishes, only: [:show] do
-    resources :ingredients, controller: 'dish_ingredients', only: [:create]
+    resources :ingredients, controller: 'dish_ingredients', only: [:create, :destroy]
   end
 
   resources :chef, controller: 'chefs', only: [:show] do

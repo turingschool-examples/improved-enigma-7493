@@ -27,7 +27,9 @@ RSpec.describe "dish show", type: :feature do
     end
 
     it 'They see a list of ingredients ant total calorie count for that dish' do
-      expect(page).to have_content("Ingredients: Carrot Celery Onion")
+      expect(page).to have_content("Carrot")
+      expect(page).to have_content("Celery")
+      expect(page).to have_content("Onion")
       expect(page).to have_content("Total Calories: 90")
     end
   end
@@ -65,4 +67,45 @@ RSpec.describe "dish show", type: :feature do
       expect(page).to have_content("Total Calories: 60")
     end
   end
+
+  describe 'The user can delete ingredients' do
+    before(:each) do
+      @chef_1 = Chef.create!(name: "Sam")
+
+      @dish_1 = Dish.create!(name: "Vegetable Soup", description: "It has veggies", chef: @chef_1)
+
+      @ingredient_1 = Ingredient.create!(name: "Carrot", calories: 50)
+      @ingredient_2 = Ingredient.create!(name: "Celery", calories: 10)
+
+      @dish_1.ingredients << @ingredient_1
+      @dish_1.ingredients << @ingredient_2
+
+      visit dish_path(@dish_1)
+    end
+
+    it 'They see a button next to each ingredient to delete it from this dish' do
+      within "#ingredient-#{@ingredient_1.id}" do
+        expect(page).to have_selector(:link_or_button, "Delete")
+      end
+      
+      within "#ingredient-#{@ingredient_2.id}" do
+        expect(page).to have_selector(:link_or_button, "Delete")
+      end
+    end
+
+    it 'They click button, redirects back, and ingredient is gone' do
+      expect(page).to have_content("Carrot")
+      expect(page).to have_content("Celery")
+
+      within "#ingredient-#{@ingredient_1.id}" do
+        expect(page).to have_selector(:link_or_button, "Delete")
+        click_button("Delete")
+      end
+
+      expect(current_path).to eq(dish_path(@dish_1))
+      expect(page).to_not have_content("Carrot")
+      expect(page).to have_content("Celery")
+    end
+  end
+  
 end
