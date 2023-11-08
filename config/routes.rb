@@ -6,4 +6,7 @@ Rails.application.routes.draw do
 
   get "dish/:id", to: "dish#show"
   patch "dish/:id", to: "dish#update"
+
+  get "chef/:id", to: "chef#show"
+  get "chef/:id/ingredients", to: "chef_ingredients#show"
 end

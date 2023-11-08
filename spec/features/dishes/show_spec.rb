@@ -39,7 +39,7 @@ RSpec.describe "dish show page", type: :feature do
     visit "/dish/#{@dish1.id}"
     expect(page).to have_field(:ingredient_id)
     fill_in :ingredient_id, with:@extra_sugar.id
-    click_button("Add Ingredient")
+    click_button("Submit")
     expect(current_path).to eq("/dish/#{@dish1.id}")
     expect(page).to have_content("#{@extra_sugar.name}")
   end
