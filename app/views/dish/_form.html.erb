@@ -1,0 +1,6 @@
+<%= form_with url: dish_path, method: :post, data: {turbo: false}, local: true do |form| %>
+ <p> <%= form.label :name %>
+  <%= form.text_field :name, placeholder: "ex. banana" %></p>
+  <%= form.submit "Submit" %>
+  <% end %>
+  

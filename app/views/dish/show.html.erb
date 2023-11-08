@@ -12,6 +12,11 @@
       <li><%= ingredient.name %></li>
     <% end %>
   </ul>
+     <%= render partial: 'form', locals: {
+                                      path: dish_path(@dish),
+                                      method: :post,
+                                      button_text: 'Submit'
+																		} %>
 </section>
 <section id="chef-<%= @dish.id %>">
   <h3>Chef</h3>

@@ -43,7 +43,7 @@ RSpec.describe 'Dish Show Page' do
       # and a total calorie count for that dish
       # And I see the chef's name.
       
-      visit "/dish/#{@dish_1.id}"
+      visit dish_path(@dish_1)
 
       within("#dish-#{@dish_1.id}") do
         expect(page).to have_content(@dish_1.name)
@@ -57,6 +57,27 @@ RSpec.describe 'Dish Show Page' do
           within("#chef-#{@dish_1.id}") do
             expect(page).to have_content(@chef_1.name)        
           end
+    end
+
+    it 'I see a form to add an existing ingredient to the dish' do
+      # As a visitor
+      # When I visit a dish's show page
+      # I see a form to add an existing Ingredient to that Dish
+      # When I fill in the form with the ID of an Ingredient that exists in the database
+      # And I click Submit
+      # Then I am redirected to that dish's show page
+      # And I see that ingredient is now listed. 
+      
+      visit dish_path(@dish_1)
+      save_and_open_page
+      expect(page).to have_content("Add an Ingredient to this Dish")
+
+      fill_in :ingredient_id, with: @ingredient_3.id
+      click_on "Submit"
+      expect(current_path).to eq(dish_path(@dish_1))
+      within("#ingredients-#{dish_1.id}") do
+      expect(page).to have_content(@ingredient_3.name)
+      end
     end
   end
 end
