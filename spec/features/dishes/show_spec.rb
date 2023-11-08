@@ -56,8 +56,8 @@ RSpec.describe "Dishes Show" do
       within("#ingredient-#{@sugar.id}") do
       click_button "Delete"
       expect(current_path).to eq("/dishes/#{@dish2.id}")
-      expect(page).to_not have_content("Sugar")
-      end
+    end
+    expect(page).to_not have_content("Sugar")
     end
   end
 
