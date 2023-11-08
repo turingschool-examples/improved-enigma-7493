@@ -73,4 +73,26 @@ RSpec.describe 'Dishes Show Page', type: :feature do
       end
     end
   end
+
+  describe "When I visit a dish's show page" do
+    describe "I see a button next to each ingredient to delete that ingredient from a dash" do
+      it "And when I click that button
+        I am redirected back to that page
+        And the ingredient is no longer listed" do
+        visit "/dishes/#{@dish1.id}"
+
+        expect(page).to have_content("Delete Ingredient")
+        click_button("Delete Ingredient penne noodles")
+        expect(current_path).to eq("/dishes/#{@dish1.id}")
+        expect(page).to_not have_content("penne noodles")
+
+        visit "/dishes/#{@dish2.id}"
+
+        expect(page).to have_content("Delete Ingredient")
+        click_button("Delete Ingredient gf noodles")
+        expect(current_path).to eq("/dishes/#{@dish2.id}")
+        expect(page).to_not have_content("gf noodles")
+      end
+    end
+  end
 end
