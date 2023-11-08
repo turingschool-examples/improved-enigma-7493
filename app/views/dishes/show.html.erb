@@ -9,3 +9,9 @@
   <%= ingredient.name %>
 <% end %>
 <br>
+<h5>Add New Ingredient</h5>
+<%= form_with url: dish_dish_ingredients_path(@dish.id), method: :post, data: { turbo: false } do |form| %>
+  <%= form.label :ingredient_id, 'Ingredient ID' %>
+  <%= form.number_field :ingredient_id %>
+  <%= form.submit 'Add Ingredient' %>
+<% end %>
