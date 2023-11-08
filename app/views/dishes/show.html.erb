@@ -11,3 +11,9 @@
     <h5> Chef D'Cuisine: <%= @dish.chef.name %></h5>
 
   </section>
+
+  <%= form_with url: "/dishes/#{@dish.id}", method: :patch, data: {turbo: false} do |form| %>
+    <p><%= form.label "Add an ingredient to this dish" %></p>
+    <%= form.text_field :ingredient_id  %>
+    <%= form.submit 'submit' %>
+  <% end %>

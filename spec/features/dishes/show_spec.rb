@@ -50,5 +50,23 @@ RSpec.describe Dish, type: :feature do
       expect(page).to have_content("Total Calories: 100")
       expect(page).to have_content(@chef1.name)
     end
+
+    it "has form to add existing ingredient to a dish" do
+    # Story 2 of 3
+    # As a visitor
+    # When I visit a dish's show page
+    # I see a form to add an existing Ingredient to that Dish
+    # When I fill in the form with the ID of an Ingredient that exists in the database
+    # And I click Submit
+    # Then I am redirected to that dish's show page
+    # And I see that ingredient is now listed. 
+
+    visit "/dishes/#{@dish1.id}"
+    expect(page).to have_field(:ingredient_id)
+    fill_in :ingredient_id, with: @ingredient6.id
+    click_button("submit")
+    expect(current_path).to eq "/dishes/#{@dish1.id}"
+    expect(page).to have_content(@ingredient6.name)
+    end
   end
 end
