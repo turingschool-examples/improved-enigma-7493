@@ -4,5 +4,4 @@ class Dish < ApplicationRecord
   has_many :dish_ingredients
   has_many :ingredients, through: :dish_ingredients
 
-  #make relationship test
 end

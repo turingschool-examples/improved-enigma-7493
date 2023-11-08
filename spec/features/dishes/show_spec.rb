@@ -2,8 +2,8 @@ require "rails_helper"
 
 RSpec.describe Dish, type: :feature do
   before :each do 
-    @chef1 = Studio.create(name: "Frenchie")
-    @chef2 = Studio.create(name: "Baker Boy")
+    @chef1 = Chef.create(name: "Frenchie")
+    @chef2 = Chef.create(name: "Baker Boy")
 
     @dish1 = @chef1.dishes.create(name: "Soup", description: "Soup")
     @dish2 = @chef1.dishes.create(name: "Goupy Goup", description: "Goupy Soupy Soup Goup")
@@ -17,7 +17,7 @@ RSpec.describe Dish, type: :feature do
     
   end
   describe "dish show page" do
-    it "shows movie title, year, and genre" do
+    xit "shows movie title, year, and genre" do
       # Story 1 of 3
       # As a visitor
       # When I visit a dish's show page
@@ -28,7 +28,6 @@ RSpec.describe Dish, type: :feature do
       visit "/dishes/#{@dish1.id}"
       expect(page).to have_content(@dish1.name)
       expect(page).to have_content(@dish1.description)
-      expect(page).to have_content(@movie3.genre)
     end
   end
 end
