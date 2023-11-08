@@ -69,4 +69,18 @@ RSpec.configure do |config|
       with.library :rails
     end
   end
+
+  require 'capybara/rspec'
+  require 'capybara/rails'
+
+  Capybara.register_driver :selenium do |app|
+    Capybara::Selenium::Driver.new(app, browser: :chrome)
+  end
+
+  Capybara.javascript_driver = :selenium
+
+  RSpec.configure do |config|
+    config.include Capybara::DSL
+  end
+
 end

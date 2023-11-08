@@ -1,0 +1,6 @@
+<h1>Ingredients Used by <%= @chef.name %></h1>
+<ul>
+  <% Chef.find(params[:chef_id]).ingredients.each do |ingredient| %>
+  <%= ingredient.name %>
+<% end %>
+</ul>

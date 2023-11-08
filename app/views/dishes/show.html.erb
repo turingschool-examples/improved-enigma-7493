@@ -1,0 +1,18 @@
+<h1><%= @dish.name %></h1>
+<p><%= @dish.description %></p>
+
+<p>Chef: <%= @dish.chef.name %></p>
+
+<h2>Ingredients:</h2>
+<ul>
+  <% @dish.ingredients.each do |ingredient| %>
+    <li><%= ingredient.name %> (Calories: <%= ingredient.calories %>)</li>
+  <% end %>
+</ul>
+<p>Total Calories: <%= @dish.total_calories %></p>
+
+<h2>Add an Existing Ingredient:</h2>
+<%= form_with model: @dish, url: add_ingredient_to_dish_path(@dish), method: :post, local: true do |form| %>
+  <%= form.collection_select :ingredient_ids, Ingredient.all, :id, :name, {}, multiple: true %>
+  <%= form.submit "Add Ingredient" %>
+<% end %>
