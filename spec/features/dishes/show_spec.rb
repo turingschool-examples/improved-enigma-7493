@@ -81,15 +81,15 @@ RSpec.describe 'Dishes Show Page', type: :feature do
         And the ingredient is no longer listed" do
         visit "/dishes/#{@dish1.id}"
 
-        expect(page).to have_content("Delete Ingredient")
-        click_button("Delete Ingredient penne noodles")
+        expect(page).to have_content("Delete #{@ingredient1.name}")
+        click_button("Delete #{@ingredient1.name}")
         expect(current_path).to eq("/dishes/#{@dish1.id}")
         expect(page).to_not have_content("penne noodles")
 
         visit "/dishes/#{@dish2.id}"
 
-        expect(page).to have_content("Delete Ingredient")
-        click_button("Delete Ingredient gf noodles")
+        expect(page).to have_content("Delete #{@ingredient2.name}")
+        click_button("Delete #{@ingredient2.name}")
         expect(current_path).to eq("/dishes/#{@dish2.id}")
         expect(page).to_not have_content("gf noodles")
       end

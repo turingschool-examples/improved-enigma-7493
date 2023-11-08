@@ -7,7 +7,7 @@
 
 <h3>List of Ingredients:</h3> 
 <% @dish.ingredients.each do |ingredient| %>
-  <%= ingredient.name %>
+  <%= ingredient.name %> <%= button_to "Delete #{ingredient.name}", "/dishes/#{@dish.id}/ingredients/#{ingredient.id}", method: :delete %>
 <% end %>
 
 <%= form_with url: "/dishes/#{@dish.id}", method: :patch do |f| %>
