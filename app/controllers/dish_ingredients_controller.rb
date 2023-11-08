@@ -6,4 +6,12 @@ class DishIngredientsController < ApplicationController
 
     redirect_to dish_path(@dish)
   end
+
+  def destroy
+    ingredient = Ingredient.find(params[:id])
+    dish = Dish.find(params[:dish_id])
+    dish.ingredients.delete(ingredient)
+
+    redirect_to dish_path(dish)
+  end
 end

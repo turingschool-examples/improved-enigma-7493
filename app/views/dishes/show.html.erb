@@ -4,11 +4,12 @@
 
 
 <h2>Ingredients</h2>
-<p>Ingredients: 
-  <% @dish.ingredients.each do |ingredient| %>
+<% @dish.ingredients.each do |ingredient| %>
+  <div id=<%= "ingredient-#{ingredient.id}" %>>
     <%= ingredient.name %>
-  <% end %>
-</p>
+    <%= button_to "Delete", dish_ingredient_path(@dish, ingredient), method: :delete %>
+  </div>
+<% end %>
 
 <h2>Calories</h2>
 <p>Total Calories: <%= @dish.total_calories %></p>
