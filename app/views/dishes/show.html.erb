@@ -9,3 +9,8 @@
 <% @dish.ingredients.each do |ingredient| %>
   <%= ingredient.name %>
 <% end %>
+
+<%= form_with url: "/dishes/#{@dish.id}", method: :patch do |f| %>
+  <%= f.text_field :add_ingredient %>
+  <%= f.submit "Submit" %>
+<% end %>
