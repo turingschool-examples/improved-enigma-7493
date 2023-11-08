@@ -50,4 +50,27 @@ RSpec.describe 'Dishes Show Page', type: :feature do
       expect(page).to have_content("Chef: John Doe")
     end
   end
+
+  describe "When I visit a dish's show page" do
+    describe "I see a form to add an existing Ingredient to that Dish," do
+      it "when i fill in the form with the ingredient ID and submit, 
+        then i am redirected to that dishes show page and that ingredient is now listed" do
+        visit "/dishes/#{@dish1.id}"
+        expect(page).to_not have_content("gf noodle")
+        fill_in(:add_ingredient, with: "#{@ingredient4.id}")
+        click_button("Submit")
+
+        expect(current_path).to eq("/dishes/#{@dish1.id}")
+        expect(page).to have_content("gf noodle")
+
+        visit "/dishes/#{@dish2.id}"
+        expect(page).to_not have_content("veggie meat")
+        fill_in(:add_ingredient, with: "#{@ingredient3.id}")
+        click_button("Submit")
+
+        expect(current_path).to eq("/dishes/#{@dish2.id}")
+        expect(page).to have_content("veggie meat")
+      end
+    end
+  end
 end
