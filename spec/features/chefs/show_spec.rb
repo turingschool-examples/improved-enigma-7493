@@ -19,6 +19,7 @@ RSpec.describe '/chefs/:chef_id' do
     DishIngredient.create!(dish: @dish1, ingredient: @tomato)
     DishIngredient.create!(dish: @dish1, ingredient: @bread)
     DishIngredient.create!(dish: @dish2, ingredient: @tomato)
+    DishIngredient.create!(dish: @dish2, ingredient: @onion)
     DishIngredient.create!(dish: @dish2, ingredient: @lettuce)
     DishIngredient.create!(dish: @dish3, ingredient: @bread)
     DishIngredient.create!(dish: @dish3, ingredient: @tomato)
@@ -40,6 +41,16 @@ RSpec.describe '/chefs/:chef_id' do
       
         expect(current_path).to eq("/chefs/#{@gordon.id}/ingredients")
         expect(page).to have_content("All Ingredients: #{@beef.name}, #{@bread.name}, #{@lettuce.name}, #{@onion.name}, and #{@tomato.name}")
+      end
+
+      it 'shows three most popular ingredients' do
+        #US extension 2
+        visit "/chefs/#{@gordon.id}"
+
+        expect(page).to have_content("#{@tomato.name}") 
+        expect(page).to have_content("#{@tomato.name}") 
+        expect(page).to have_content("#{@bread.name}") 
+        expect(page).to have_content("#{@onion.name}") 
       end
     end
   end

@@ -16,6 +16,7 @@ RSpec.describe Chef, type: :model do
   
     DishIngredient.create!(dish: @dish1, ingredient: @beef)
     DishIngredient.create!(dish: @dish1, ingredient: @onion)
+    DishIngredient.create!(dish: @dish2, ingredient: @onion)
     DishIngredient.create!(dish: @dish1, ingredient: @tomato)
     DishIngredient.create!(dish: @dish1, ingredient: @bread)
     DishIngredient.create!(dish: @dish2, ingredient: @tomato)
@@ -36,6 +37,12 @@ RSpec.describe Chef, type: :model do
   describe 'distinct_ingredients' do
     it 'shows distinct ingredients used by chef' do
       expect(@gordon.distinct_ingredients).to eq([@beef.name, @bread.name, @lettuce.name, @onion.name, @tomato.name])
+    end
+  end
+
+  describe 'popular_ingredients' do
+    it 'shows three top popular ingredients used by chef' do
+      expect(@gordon.popular_ingredients).to match_array([@tomato, @bread, @onion])
     end
   end
 end

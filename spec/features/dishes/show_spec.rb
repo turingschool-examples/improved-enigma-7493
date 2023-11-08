@@ -63,7 +63,7 @@ RSpec.describe '/dishes/:chef_id' do
       end
 
       it 'has a button to delete ingredient, and deletes it' do
-        #US extension
+        #US extension 1
         visit "/dishes/#{@dish2.id}"
         expect(page).to have_button("Delete Lettuce")
         expect(page).to have_button("Delete Tomato")
