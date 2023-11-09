@@ -5,6 +5,7 @@
     <section id="ingredient-list">
       <h5> List of Ingredients: <% @dish.ingredients.each do |i| %></h5>
         <p><%= i.name%></p>
+        <p><%= button_to "Delete #{i.name}", "/dishes/#{@dish.id}", method: :patch, params: { delete_ingredient: i.id} %></p>
       <% end %>
     </section>
     <h5> Total Calories: <%= @dish.calorie_count %></h5>

@@ -68,5 +68,21 @@ RSpec.describe Dish, type: :feature do
     expect(current_path).to eq "/dishes/#{@dish1.id}"
     expect(page).to have_content(@ingredient6.name)
     end
+
+    it "has button to delete ingredient from dish" do
+    # Extension 1 of 2
+    # As a visitor
+    # When I visit a dish's show page
+    # I see a button next to each ingredient to delete that ingredient from a dish
+    # And when I click that button
+    # I am redirected back to that page
+    # And the ingredient is no longer listed.
+
+    visit "/dishes/#{@dish1.id}"
+    expect(page).to have_button("Delete #{@ingredient1.name}")
+    click_button("Delete #{@ingredient1.name}")
+    expect(current_path).to eq("/dishes/#{@dish1.id}")
+    expect(page).to_not have_content(@ingredient1.name)
+    end
   end
 end

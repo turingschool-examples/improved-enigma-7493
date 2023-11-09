@@ -6,8 +6,13 @@ class DishesController < ApplicationController
 
   def update
     @dish = Dish.find(params[:id])
-    @ingredient = Ingredient.find(params[:ingredient_id])
-    @dish.ingredients << @ingredient
+    if params[:delete_ingredient].present?
+      @ingredient = Ingredient.find(params[:delete_ingredient])
+      @dish.ingredients.delete(@ingredient)
+    else
+      @ingredient = Ingredient.find(params[:ingredient_id])
+      @dish.ingredients << @ingredient
+    end
     redirect_to "/dishes/#{@dish.id}"
   end
 end
