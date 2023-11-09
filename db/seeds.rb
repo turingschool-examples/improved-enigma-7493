@@ -9,7 +9,7 @@
 @chef2 = Chef.create(name: "Baker Boy")
 
 @dish1 = @chef1.dishes.create(name: "Soup", description: "Soupy Soup")
-@dish2 = @chef1.dishes.create(name: "Goupy Goup", description: "Goupy Soupy Soup Goup")
+@dish2 = @chef2.dishes.create(name: "Goupy Goup", description: "Goupy Soupy Soup Goup")
 
 @ingredient1 = Ingredient.create(name: "Onion", calories: 10)
 @ingredient2 = Ingredient.create(name: "Garlic", calories: 20)
